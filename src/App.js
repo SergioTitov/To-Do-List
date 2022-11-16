@@ -14,25 +14,26 @@ import Pages from "./components/Pages/Pages";
 function App() {
   return (
     <div className='App'>
-      <Title />
-      <Input />
-      <div className='tasks-buttons'>
-        <All />
-        <Done />
-        <Undone />
-
-        <SortByDate />
-        <ArrowUp />
-        <ArrowDown />
+      <div className='main'>
+        <Title />
+        <Input />
+        <div className='tasks-buttons'>
+          <All />
+          <Done />
+          <Undone />
+          <SortByDate />
+          <ArrowUp />
+          <ArrowDown />
+        </div>
+        <div className='tasks-task'>
+          <Tasks />
+          <Tasks />
+          <Tasks />
+          <Tasks />
+          <Tasks />
+        </div>
+        <Pages />
       </div>
-      <div className='tasks-task'>
-        <Tasks />
-        <Tasks />
-        <Tasks />
-        <Tasks />
-        <Tasks />
-      </div>
-      <Pages />
     </div>
   );
 }

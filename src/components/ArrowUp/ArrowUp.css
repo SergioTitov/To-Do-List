@@ -1,5 +1,6 @@
 .ArrowUp {
-  background: url(/src/img/arrow.png) 0 0 / auto 100% no-repeat;
+  background: url(/src/assets/arrowUpWhite3.jpg.jpg) 0 0 / auto 100% no-repeat;
   width: 30px;
   height: 30px;
+  transform: rotate(360deg);
 }

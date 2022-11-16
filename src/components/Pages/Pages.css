@@ -1,9 +1,21 @@
 .pages {
   display: flex;
-  width: 600px;
+  width: 800px;
   justify-content: space-between;
 }
 .page {
-  width: 40px;
+  width: 60px;
+  height: 30px;
+}
+.page_left {
+  background: url(/src/assets/arrowLeftWhite3.jpg\ .jpg) 0 0 / 100% 100%
+    no-repeat;
+  width: 45px;
+  height: 30px;
+}
+.page_right {
+  background: url(/src/assets/arrowRightWhite3.jpg\ .jpg) 0 0 / 100% 100%
+    no-repeat;
+  width: 45px;
   height: 30px;
 }

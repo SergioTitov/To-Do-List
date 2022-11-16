@@ -4,16 +4,14 @@ import "./Tasks.css";
 function Tasks() {
   return (
     <div className='tasks'>
-      <div>
-        <input className='checkbox' type='checkbox' />
-      </div>
+      <input className='checkbox' type='checkbox' />
+
       <div className='task'>
         <p>Go to the mall</p>
       </div>
       <div className=''>14/11/2022</div>
-      <div className='trash'>
-        <button className='delete-task'></button>
-      </div>
+
+      <button className='delete-task'></button>
     </div>
   );
 }
