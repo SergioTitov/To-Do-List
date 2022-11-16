@@ -22,3 +22,21 @@
   margin-left: 5px;
   color: aliceblue;
 }
+@media (max-width: 950px) {
+  .tasks {
+    width: 400px;
+    margin: 0 auto 10px auto;
+  }
+  .task {
+    width: 250px;
+  }
+}
+@media (max-width: 600px) {
+  .tasks {
+    width: 300px;
+    margin: 0 auto 10px auto;
+  }
+  .task {
+    width: 150px;
+  }
+}

@@ -2,3 +2,9 @@
   width: 60px;
   height: 30px;
 }
+@media (max-width: 600px) {
+  .button-all {
+    width: 30px;
+    height: 30px;
+  }
+}

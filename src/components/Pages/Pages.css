@@ -19,3 +19,31 @@
   width: 45px;
   height: 30px;
 }
+@media (max-width: 950px) {
+  .pages {
+    width: 400px;
+  }
+  .page {
+    width: 50px;
+  }
+  .page_left {
+    width: 45px;
+  }
+  .page_right {
+    width: 45px;
+  }
+}
+@media (max-width: 950px) {
+  .pages {
+    width: 300px;
+  }
+  .page {
+    width: 30px;
+  }
+  .page_left {
+    width: 35px;
+  }
+  .page_right {
+    width: 35px;
+  }
+}

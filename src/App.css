@@ -20,12 +20,47 @@
   justify-content: flex-end;
 }
 .main {
-  margin-top: 60px;
-  width: 1100px;
-  margin: 60px 10px 20px 10px;
+  padding: 0 150px;
+  width: auto;
+  margin: 60px 30px 20px 30px;
   height: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: url(/src/assets/backgr.jpg) 0 0 / 100% auto no-repeat;
+}
+
+@media (max-width: 1200px) {
+  .main {
+    max-width: 800px;
+    padding: 0 50px;
+    margin: 60px 30px 20px 30px;
+  }
+}
+
+@media (max-width: 950px) {
+  .main {
+    max-width: 500px;
+    padding: 0 70px;
+    margin: 60px 30px 20px 30px;
+  }
+  .tasks-buttons {
+    width: 400px;
+  }
+  .tasks-task {
+    width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    max-width: 400px;
+    padding: 0 20px;
+  }
+  .tasks-buttons {
+    width: 300px;
+  }
+  .tasks-task {
+    width: 300px;
+  }
 }
