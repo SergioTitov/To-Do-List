@@ -1,7 +1,7 @@
 import "/";
 import "./App.css";
 import Title from "./components/Title/Title";
-import Input from "./components/Input/Input";
+import Form from "./components/Form/Form";
 import Tasks from "./components/Tasks/Tasks";
 import All from "./components/All/All";
 import Done from "./components/Done/Done";
@@ -16,7 +16,7 @@ function App() {
     <div className='App'>
       <div className='main'>
         <Title />
-        <Input />
+        <Form />
         <div className='tasks-buttons'>
           <All />
           <Done />

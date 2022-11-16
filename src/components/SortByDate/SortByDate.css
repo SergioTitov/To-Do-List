@@ -4,12 +4,12 @@
 }
 
 @media (max-width: 950px) {
-  .SortByDate {
+  .Sort-by-date {
     margin: 0 5px 0 45px;
   }
 }
 @media (max-width: 600px) {
-  .SortByDate {
+  .Sort-by-date {
     margin: 0 5px 0 0;
     font-size: 14px;
   }
