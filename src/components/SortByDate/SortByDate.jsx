@@ -4,7 +4,7 @@ import "./SortByDate.css";
 function SortByDate() {
   return (
     <div>
-      <p className='SortByDate'>Sort By Date</p>
+      <p className='Sort-by-date'>Sort By Date</p>
     </div>
   );
 }
