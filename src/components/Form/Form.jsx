@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css";
 
-function Form(props) {
+function Form({saveTodo}) {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -10,12 +10,7 @@ function Form(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // props.onSubmit({
-    //   id: Math.floor(Math.random() * 10000),
-    //   text: input,
-    // });
-
+    saveTodo(input);
     setInput("");
   };
 

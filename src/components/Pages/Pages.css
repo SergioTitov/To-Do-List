@@ -33,7 +33,7 @@
     width: 45px;
   }
 }
-@media (max-width: 950px) {
+@media (max-width: 600px) {
   .pages {
     width: 300px;
   }

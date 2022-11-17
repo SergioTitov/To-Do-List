@@ -1,17 +1,24 @@
 import React from "react";
 import "./Tasks.css";
 
-function Tasks() {
+function Tasks({ todos, deleteTodo }) {
   return (
-    <div className='tasks'>
-      <input className='checkbox' type='checkbox' />
-
-      <div className='task'>
-        <p>Go to the mall</p>
-      </div>
-      <div className=''>14/11/2022</div>
-
-      <button className='delete-task'></button>
+    <div>
+      {todos.map(({ text, id }) => (
+        <div className='tasks' key={id}>
+          <input className='checkbox' type='checkbox' />
+          <div className='task'>
+            <p>{text}</p>
+          </div>
+          <div className=''>14/11/2022</div>
+          <button
+            className='delete-task'
+            onClick={() => {
+              deleteTodo(id);
+            }}
+          ></button>
+        </div>
+      ))}
     </div>
   );
 }
