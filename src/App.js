@@ -1,5 +1,3 @@
-import "/";
-import React, { useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -11,9 +9,19 @@ import SortByDate from "./components/SortByDate/SortByDate";
 import ArrowUp from "./components/ArrowUp/ArrowUp";
 import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
+import React, { useState } from "react";
 
 function App() {
   const [todos, setTodos] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 5;
+
+  const indexOfLastTask = currentPage * itemPerPage;
+  const indexOfFirstTask = indexOfLastTask - itemPerPage;
+  const currentTask = todos.slice(indexOfFirstTask, indexOfLastTask);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const saveTodo = (todoText) => {
     if (todoText.trim() !== "") {
@@ -25,6 +33,10 @@ function App() {
     const newTodos = todos.filter((item) => item.id !== id);
     setTodos(newTodos);
   };
+
+  // const doneTodo = (isDone) => {
+  //   const isdoneTodo = doneTodo.filter((item) => item.isDone !== false);
+  // };
 
   return (
     <div className='App'>
@@ -40,9 +52,13 @@ function App() {
           <ArrowDown />
         </div>
         <div className='tasks-task'>
-          <Tasks todos={todos} deleteTodo={deleteTodo} />
+          <Tasks todos={currentTask} deleteTodo={deleteTodo} />
         </div>
-        <Pages />
+        <Pages
+          paginate={paginate}
+          itemPerPage={itemPerPage}
+          totaItems={todos.length}
+        />
       </div>
     </div>
   );
