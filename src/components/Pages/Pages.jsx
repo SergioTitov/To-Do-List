@@ -1,16 +1,22 @@
 import React from "react";
 import "./Pages.css";
 
-function Pages() {
+function Pages({ itemPerPage, totaItems, paginate }) {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totaItems / itemPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
-    <div className='pages'>
-      <button className='page_left'></button>
-      <button className='page'>1</button>
-      <button className='page'>2</button>
-      <button className='page'>3</button>
-      <button className='page'>4</button>
-      <button className='page'>5</button>
-      <button className='page_right'></button>
+    <div className="pages">
+      <button className="page_left" />
+      {pageNumbers.map((number) => (
+        <button onClick={() => paginate(number)} key={number} className="page">
+          {number}
+        </button>
+      ))}
+      <button className="page_right" />
     </div>
   );
 }

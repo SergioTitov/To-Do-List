@@ -1,36 +1,31 @@
 import React, { useState } from "react";
 import "./Form.css";
 
-function Form(props) {
+function Form({ addTodo }) {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
-    setInput(e.target.value);
+    setInput(e.target.value); //элемент на котором произошло событие ввода текста, мы берем его значение
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // props.onSubmit({
-    //   id: Math.floor(Math.random() * 10000),
-    //   text: input,
-    // });
-
+    addTodo(input);
     setInput("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        className='input'
-        type='text'
-        placeholder='Add new todo'
-        id='todo-input'
+        className="input"
+        type="text"
+        placeholder="Add new todo"
+        id="todo-input"
         value={input}
-        name='text'
+        name="text"
         onChange={handleChange}
       />
-      <button className='add-button' id='add-button'>
+      <button className="add-button" id="add-button">
         Add
       </button>
     </form>

@@ -4,7 +4,7 @@ import "./ArrowDown.css";
 function ArrowDown() {
   return (
     <div>
-      <button className='ArrowDown'></button>
+      <button className='ArrowDown'/>
     </div>
   );
 }
