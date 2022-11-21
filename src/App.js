@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -21,7 +21,10 @@ function App() {
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 5;
-  
+
+  // const [filterDate, setFilterDate] = useState('up')
+  // useEffect(()=>{setFilterDate},[filterDate])
+
   const indexOfLastTask = currentPage * itemPerPage;
   const indexOfFirstTask = indexOfLastTask - itemPerPage;
   const currentTask = todos.slice(indexOfFirstTask, indexOfLastTask);
@@ -39,6 +42,27 @@ function App() {
       setTodos([...todos, newTask]);
     }
   };
+
+  //   const dateDown = todos.sort((a, b) => {
+  //     if (a.date < b.date) {
+  //       return 1;
+  //     }
+  //     if (a.date > b.date) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   });
+  // console.log(dateDown);
+
+
+  // const dateDown = todos.sort((a, b) => {
+  //   a.date - b.date;
+  //   return dateDown;
+  // });
+
+
+  // const dateDown = todos.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
+  // console.log(dateDown);
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter((item) => item.id !== id);
