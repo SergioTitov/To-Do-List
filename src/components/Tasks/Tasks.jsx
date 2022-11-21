@@ -6,7 +6,7 @@ function Tasks({
   deleteTodo,
   handleChangeStatus,
   editTodo,
-  FILTER_MAP,
+  filterMap,
   filter,
 }) {
   const [isEditing, setEditing] = useState(false);
@@ -16,20 +16,11 @@ function Tasks({
     setNewText(e.target.value);
   }
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   editTodo(id, newText);
-  //   setNewText("");
-  //   setEditing(false);
-  // }
-
-  // console.log(editTodo());
-
   return (
     <div>
-      {todos.filter(FILTER_MAP[filter]).map(({ text, id, date, isDone }) =>
+      {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
         isEditing ? (
-          <div className="tasks" key={id}>
+          <div className='tasks' key={id}>
             <form
               onSubmit={(e) => {
                 console.log(id);
@@ -42,42 +33,44 @@ function Tasks({
               <div>
                 <input
                   key={id}
-                  placeholder="edit todo"
+                  placeholder='edit todo'
                   value={newText}
                   onChange={handleChange}
-                  type="text"
+                  type='text'
                 />
               </div>
               <div>
-                <button type="button" onClick={() => setEditing(false)}>
+                <button type='button' onClick={() => setEditing(false)}>
                   Cancel
                 </button>
-                <button type="submit">Save</button>
+                <button type='submit'>Save</button>
               </div>
             </form>
           </div>
         ) : (
-          <div className="tasks" key={id}>
+          <div className='tasks' key={id}>
             <input
               id={id}
-              className="checkbox"
-              type="checkbox"
+              className='checkbox'
+              type='checkbox'
               checked={isDone}
-              onChange={() => handleChangeStatus(isDone, id)}
+              onChange={() => handleChangeStatus(id)}
             />
-            <div className="task">
-              <p
+            <div className='task'>
+              <span
                 onDoubleClick={() => {
                   // console.log(id);
                   setEditing(true);
                 }}
               >
                 {text}
-              </p>
+              </span>
             </div>
-            <p>{date.toLocaleString()}</p>
+            <div className='task-date'>
+              <span>{date.toLocaleString()}</span>
+            </div>
             <button
-              className="delete-task"
+              className='delete-task'
               onClick={() => {
                 deleteTodo(id);
               }}

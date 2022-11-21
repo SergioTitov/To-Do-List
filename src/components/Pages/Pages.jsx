@@ -9,14 +9,14 @@ function Pages({ itemPerPage, totaItems, paginate }) {
   }
 
   return (
-    <div className="pages">
-      <button className="page_left" />
+    <div className='pages'>
+      <button className='page_left'></button>
       {pageNumbers.map((number) => (
-        <button onClick={() => paginate(number)} key={number} className="page">
+        <button onClick={() => paginate(number)} key={number} className='page'>
           {number}
         </button>
       ))}
-      <button className="page_right" />
+      <button className='page_right'></button>
     </div>
   );
 }

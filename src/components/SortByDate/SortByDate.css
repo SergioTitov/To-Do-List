@@ -1,16 +1,16 @@
 .Sort-by-date {
   height: 30px;
-  margin: 0 5px 0 445px;
+  margin: 0 5px 0 483px;
 }
 
 @media (max-width: 950px) {
   .Sort-by-date {
-    margin: 0 5px 0 45px;
+    margin: 0 5px 0 83px;
   }
 }
 @media (max-width: 600px) {
   .Sort-by-date {
     margin: 0 5px 0 0;
-    font-size: 14px;
+    font-size: 13px;
   }
 }

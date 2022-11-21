@@ -9,19 +9,19 @@ import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
 
-const FILTER_MAP = {
+const filterMap = {
   All: () => true,
   Done: (todo) => todo.isDone,
   Undone: (todo) => !todo.isDone,
 };
-const FILTER_NAMES = Object.keys(FILTER_MAP);
+const filterNames = Object.keys(filterMap);
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 5;
-
+  
   const indexOfLastTask = currentPage * itemPerPage;
   const indexOfFirstTask = indexOfLastTask - itemPerPage;
   const currentTask = todos.slice(indexOfFirstTask, indexOfLastTask);
@@ -45,7 +45,7 @@ function App() {
     setTodos(newTodos);
   };
 
-  const handleChangeStatus = (isDone, id) => {
+  const handleChangeStatus = (id) => {
     // let [obj] = todos.filter((item) => item.id === id);
     // obj.isDone = !isDone;
     // let todosClone = [...todos];
@@ -72,7 +72,7 @@ function App() {
     setTodos(editedTodoList);
   }
 
-  const filterList = FILTER_NAMES.map((name) => (
+  const filterList = filterNames.map((name) => (
     <FilterButton
       key={name}
       name={name}
@@ -82,23 +82,23 @@ function App() {
   ));
 
   return (
-    <div className="App">
-      <div className="main">
+    <div className='App'>
+      <div className='main'>
         <Title />
         <Form addTodo={addTodo} />
-        <div className="tasks-buttons">
+        <div className='tasks-buttons'>
           {filterList}
           <SortByDate />
           <ArrowUp />
           <ArrowDown />
         </div>
-        <div className="tasks-task">
+        <div className='tasks-task'>
           <Tasks
             todos={currentTask}
             deleteTodo={deleteTodo}
             handleChangeStatus={handleChangeStatus}
             editTodo={editTodo}
-            FILTER_MAP={FILTER_MAP}
+            filterMap={filterMap}
             filter={filter}
           />
         </div>
