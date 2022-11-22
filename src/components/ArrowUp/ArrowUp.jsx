@@ -1,10 +1,12 @@
 import React from "react";
 import "./ArrowUp.css";
 
-function ArrowUp() {
+function ArrowUp({dateUp}) {
   return (
     <div>
-      <button className='ArrowUp'/>
+      <button className='ArrowUp'onClick={() => {
+                dateUp();
+              }} />
     </div>
   );
 }

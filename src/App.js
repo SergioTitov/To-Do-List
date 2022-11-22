@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -22,9 +22,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 5;
 
-  // const [filterDate, setFilterDate] = useState('up')
-  // useEffect(()=>{setFilterDate},[filterDate])
-
   const indexOfLastTask = currentPage * itemPerPage;
   const indexOfFirstTask = indexOfLastTask - itemPerPage;
   const currentTask = todos.slice(indexOfFirstTask, indexOfLastTask);
@@ -43,26 +40,35 @@ function App() {
     }
   };
 
-  //   const dateDown = todos.sort((a, b) => {
-  //     if (a.date < b.date) {
-  //       return 1;
-  //     }
-  //     if (a.date > b.date) {
-  //       return -1;
-  //     }
-  //     return 0;
-  //   });
-  // console.log(dateDown);
+  const dateDown = () => {
+    const array = [...todos].sort((a, b) => {
+      if (a.date < b.date) {
+        return 1;
+      }
+      if (a.date === b.date) {
+        return 0;
+      }
+      if (a.date > b.date) {
+        return -1;
+      }
+    });
+    setTodos(array);
+  };
 
-
-  // const dateDown = todos.sort((a, b) => {
-  //   a.date - b.date;
-  //   return dateDown;
-  // });
-
-
-  // const dateDown = todos.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
-  // console.log(dateDown);
+  const dateUp = () => {
+    const array = [...todos].sort((a, b) => {
+      if (a.date > b.date) {
+        return 1;
+      }
+      if (a.date === b.date) {
+        return 0;
+      }
+      if (a.date < b.date) {
+        return -1;
+      }
+    });
+    setTodos(array);
+  };
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter((item) => item.id !== id);
@@ -113,8 +119,8 @@ function App() {
         <div className='tasks-buttons'>
           {filterList}
           <SortByDate />
-          <ArrowUp />
-          <ArrowDown />
+          <ArrowUp dateUp={dateUp} />
+          <ArrowDown dateDown={dateDown} />
         </div>
         <div className='tasks-task'>
           <Tasks
