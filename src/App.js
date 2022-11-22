@@ -28,6 +28,8 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+// add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
       const newTask = {
@@ -40,6 +42,7 @@ function App() {
     }
   };
 
+// Sort by date
   const dateDown = () => {
     const array = [...todos].sort((a, b) => {
       if (a.date < b.date) {
@@ -55,6 +58,7 @@ function App() {
     setTodos(array);
   };
 
+// Sort by date
   const dateUp = () => {
     const array = [...todos].sort((a, b) => {
       if (a.date > b.date) {
@@ -70,6 +74,7 @@ function App() {
     setTodos(array);
   };
 
+// delete one task
   const deleteTodo = (id) => {
     const newTodos = todos.filter((item) => item.id !== id);
     setTodos(newTodos);
@@ -91,6 +96,7 @@ function App() {
     setTodos(updatedTodos);
   };
 
+// editing on doubleClick
   function editTodo(id, newName) {
     const editedTodoList = todos.map((todo) => {
       console.log(id);
@@ -102,6 +108,7 @@ function App() {
     setTodos(editedTodoList);
   }
 
+// filtering by 
   const filterList = filterNames.map((name) => (
     <FilterButton
       key={name}
@@ -110,6 +117,8 @@ function App() {
       setFilter={setFilter}
     />
   ));
+
+
 
   return (
     <div className='App'>
@@ -136,6 +145,8 @@ function App() {
           paginate={paginate}
           itemPerPage={itemPerPage}
           totaItems={todos.length}
+          currentPage={currentPage}
+        
         />
       </div>
     </div>
