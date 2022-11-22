@@ -5,8 +5,10 @@ function ArrowDown({dateDown}) {
   return (
     <div>
       <button className='ArrowDown' onClick={() => {
-                dateDown();
-              }}/>
+                dateDown();                
+              }}
+              
+              />
     </div>
   );
 }

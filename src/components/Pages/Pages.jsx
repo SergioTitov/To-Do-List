@@ -16,7 +16,8 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
         disabled={currentPage <= 1}
       ></button>
       {pageNumbers.map((number) => (
-        <button onClick={() => paginate(number)} key={number} className='page'>
+        <button style={{ color: currentPage === number ? "white" : "", backgroundColor: currentPage === number ? "rgb(47, 79, 79)" : ""}}
+        onClick={() => paginate(number)} key={number} className='page'>
           {number}
         </button>
       ))}
