@@ -19,6 +19,11 @@
   width: 45px;
   height: 30px;
 }
+.pages_left_notActive {
+  background: transparent;
+  border: none !important;
+  font-size: 0;
+}
 @media (max-width: 950px) {
   .pages {
     width: 400px;

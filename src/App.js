@@ -28,8 +28,7 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
-// add new task
+  // add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
       const newTask = {
@@ -38,43 +37,39 @@ function App() {
         date: new Date(),
         isDone: false,
       };
-      setTodos([...todos, newTask]);
+      setTodos([newTask, ...todos]);
     }
   };
 
-// Sort by date
+  // Sort by date
   const dateDown = () => {
     const array = [...todos].sort((a, b) => {
-      if (a.date < b.date) {
-        return 1;
-      }
-      if (a.date === b.date) {
-        return 0;
-      }
       if (a.date > b.date) {
+        return 1;
+      } else if (a.date === b.date) {
+        return 0;
+      } else {
         return -1;
       }
     });
     setTodos(array);
   };
 
-// Sort by date
+  // Sort by date
   const dateUp = () => {
     const array = [...todos].sort((a, b) => {
-      if (a.date > b.date) {
-        return 1;
-      }
-      if (a.date === b.date) {
-        return 0;
-      }
       if (a.date < b.date) {
+        return 1;
+      } else if (a.date === b.date) {
+        return 0;
+      } else {
         return -1;
       }
     });
     setTodos(array);
   };
 
-// delete one task
+  // delete one task
   const deleteTodo = (id) => {
     const newTodos = todos.filter((item) => item.id !== id);
     setTodos(newTodos);
@@ -96,7 +91,7 @@ function App() {
     setTodos(updatedTodos);
   };
 
-// editing on doubleClick
+  // editing on doubleClick
   function editTodo(id, newName) {
     const editedTodoList = todos.map((todo) => {
       console.log(id);
@@ -108,7 +103,7 @@ function App() {
     setTodos(editedTodoList);
   }
 
-// filtering by 
+  // filtering by
   const filterList = filterNames.map((name) => (
     <FilterButton
       key={name}
@@ -117,8 +112,6 @@ function App() {
       setFilter={setFilter}
     />
   ));
-
-
 
   return (
     <div className='App'>
@@ -141,13 +134,16 @@ function App() {
             filter={filter}
           />
         </div>
-        <Pages
-          paginate={paginate}
-          itemPerPage={itemPerPage}
-          totaItems={todos.length}
-          currentPage={currentPage}
-        
-        />
+        {todos.length !== 0 ? (
+          <Pages
+            paginate={paginate}
+            itemPerPage={itemPerPage}
+            totaItems={todos.length}
+            currentPage={currentPage}
+          />
+        ) : (
+          <h2>Tasks not found</h2>
+        )}
       </div>
     </div>
   );

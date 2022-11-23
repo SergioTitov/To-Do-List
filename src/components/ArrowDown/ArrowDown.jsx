@@ -1,14 +1,15 @@
 import React from "react";
 import "./ArrowDown.css";
 
-function ArrowDown({dateDown}) {
+function ArrowDown({ dateDown }) {
   return (
     <div>
-      <button className='ArrowDown' onClick={() => {
-                dateDown();                
-              }}
-              
-              />
+      <button
+        className='ArrowDown'
+        onClick={() => {
+          dateDown();
+        }}
+      />
     </div>
   );
 }

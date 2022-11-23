@@ -10,22 +10,38 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
 
   return (
     <div className='pages'>
-      <button
-        className='page_left'
-        onClick={() => paginate(currentPage - 1)}
-        disabled={currentPage <= 1}
-      ></button>
+      {pageNumbers.length === 1 ? (
+        <button className='pages_left_notActive' />
+      ) : (
+        <button
+          className='page_left'
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage <= 1}
+        />
+      )}
       {pageNumbers.map((number) => (
-        <button style={{ color: currentPage === number ? "white" : "", backgroundColor: currentPage === number ? "rgb(47, 79, 79)" : ""}}
-        onClick={() => paginate(number)} key={number} className='page'>
+        <button
+          style={{
+            color: currentPage === number ? "white" : "",
+            backgroundColor: currentPage === number ? "rgb(47, 79, 79)" : "",
+          }}
+          onClick={() => paginate(number)}
+          key={number}
+          className='page'
+        >
           {number}
         </button>
       ))}
-      <button
-        className='page_right'
-        onClick={() => paginate(currentPage + 1)}
-        disabled={currentPage >= pageNumbers.length}
-      ></button>
+
+      {pageNumbers.length === 1 ? (
+        <button className='pages_left_notActive' />
+      ) : (
+        <button
+          className='page_right'
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage >= pageNumbers.length}
+        />
+      )}
     </div>
   );
 }
