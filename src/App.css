@@ -30,7 +30,9 @@
   align-items: center;
   background: url(/src/assets/backgr.jpg) 0 0 / 100% auto no-repeat;
 }
-
+h3{
+  font-weight: 600;
+}
 @media (max-width: 1200px) {
   .main {
     max-width: 800px;

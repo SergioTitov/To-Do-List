@@ -16,6 +16,11 @@ function Tasks({
     setNewText(e.target.value);
   }
 
+const notNewText = () => {
+  setNewText("")
+  setEditing(false)
+}
+
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
@@ -39,8 +44,8 @@ function Tasks({
                   type='text'
                 />
               </div>
-              <div>
-                <button type='button' onClick={() => setEditing(false)}>
+              <div> 
+                <button type='button' onClick={notNewText}>
                   Cancel
                 </button>
                 <button type='submit'>Save</button>

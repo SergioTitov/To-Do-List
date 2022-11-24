@@ -75,13 +75,13 @@ function App() {
     setTodos(newTodos);
   };
 
+  //Change done and undone
   const handleChangeStatus = (id) => {
     // let [obj] = todos.filter((item) => item.id === id);
     // obj.isDone = !isDone;
     // let todosClone = [...todos];
     // todosClone[todos.findIndex((item) => item.id === id)] = obj;
     // setTodos([...todosClone]);
-
     const updatedTodos = todos.map((todo) => {
       if (id === todo.id) {
         return { ...todo, isDone: !todo.isDone };
@@ -96,7 +96,9 @@ function App() {
     const editedTodoList = todos.map((todo) => {
       console.log(id);
       if (id === todo.id) {
-        return { ...todo, name: newName };
+        console.log(newName);
+        console.log(todo);
+        return { ...todo, text: newName };
       }
       return todo;
     });
@@ -110,9 +112,10 @@ function App() {
       name={name}
       isPressed={name === filter}
       setFilter={setFilter}
+      setCurrentPage={setCurrentPage}
     />
   ));
-
+  console.log(todos);
   return (
     <div className='App'>
       <div className='main'>
@@ -137,12 +140,13 @@ function App() {
         {todos.length !== 0 ? (
           <Pages
             paginate={paginate}
+            filter={filter}
             itemPerPage={itemPerPage}
             totaItems={todos.length}
             currentPage={currentPage}
           />
         ) : (
-          <h2>Tasks not found</h2>
+          <h3>Tasks not found</h3>
         )}
       </div>
     </div>
