@@ -90,7 +90,7 @@ function App() {
     });
     setTodos(updatedTodos);
   };
-
+  
   // editing on doubleClick
   function editTodo(id, newName) {
     const editedTodoList = todos.map((todo) => {
@@ -116,6 +116,7 @@ function App() {
     />
   ));
   console.log(todos);
+
   return (
     <div className='App'>
       <div className='main'>

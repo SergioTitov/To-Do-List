@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import "./Pages.css";
 
 function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
   const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totaItems / itemPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  useEffect(() => {})
+    for (let i = 1; i <= Math.ceil(totaItems / itemPerPage); i++) {
+      pageNumbers.push(i);
+    }
 
   return (
     <div className='pages'>

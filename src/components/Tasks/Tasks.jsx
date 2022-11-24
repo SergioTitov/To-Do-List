@@ -16,15 +16,15 @@ function Tasks({
     setNewText(e.target.value);
   }
 
-const notNewText = () => {
-  setNewText("")
-  setEditing(false)
-}
+  const notNewText = () => {
+    setNewText("");
+    setEditing(false);
+  };
 
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
-        isEditing ? (
+        isEditing === id ? (
           <div className='tasks' key={id}>
             <form
               onSubmit={(e) => {
@@ -32,7 +32,7 @@ const notNewText = () => {
                 e.preventDefault();
                 editTodo(id, newText);
                 setNewText("");
-                setEditing(false);
+                setEditing("");
               }}
             >
               <div>
@@ -44,7 +44,7 @@ const notNewText = () => {
                   type='text'
                 />
               </div>
-              <div> 
+              <div>
                 <button type='button' onClick={notNewText}>
                   Cancel
                 </button>
@@ -65,7 +65,7 @@ const notNewText = () => {
               <span
                 onDoubleClick={() => {
                   // console.log(id);
-                  setEditing(true);
+                  setEditing(id);
                 }}
               >
                 {text}
