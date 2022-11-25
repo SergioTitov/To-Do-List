@@ -11,11 +11,33 @@
 .task {
   width: 650px;
 }
+
+
 .checkbox {
   width: 20px;
   height: 20px;
+  background: transparent;
+  overflow: hidden;
+}
+.checkbox::before {
+  border-radius: 19px;
+  background: rgba(124, 117, 117, 1);
+  box-sizing:content-box;
+  content: close-quote;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
 }
 
+.checkbox:checked:before {
+  background-color:rgb(31, 28, 28);
+  
+}
+
+span {
+  word-break: break-all;
+}
 .delete-task {
   background: url(/src/assets/trash.png) 0 0 /100% auto no-repeat;
   height: 20px;
@@ -45,4 +67,3 @@
     width: 150px;
   }
 }
-

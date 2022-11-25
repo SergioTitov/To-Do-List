@@ -33,11 +33,15 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // When delete all tasks on page automatically change page on -1
+  if (currentPage !== 1 && currentTask.length === 0) {
+    setCurrentPage(currentPage - 1);
+  }
 
   ////////////////////////////////////////
 
   ////////////////////////////////////////
-  
+
   // add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
@@ -47,7 +51,12 @@ function App() {
         date: new Date(),
         isDone: false,
       };
-      setTodos([newTask, ...todos]);
+      setTodos(
+        [newTask, ...todos].filter(
+          (value, index, todos) =>
+            index === todos.findLastIndex((item) => item.text === value.text)
+        )
+      );
     }
   };
 
@@ -104,7 +113,7 @@ function App() {
   // editing on doubleClick
   function editTodo(id, newName) {
     const editedTodoList = todos.map((todo) => {
-      if (id === todo.id) {
+      if (id === todo.id && newName.trim() !== "") {
         return { ...todo, text: newName };
       }
       return todo;

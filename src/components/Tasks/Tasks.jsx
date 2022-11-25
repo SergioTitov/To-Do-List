@@ -55,6 +55,7 @@ function Tasks({
           </div>
         ) : (
           <div className='tasks' key={id}>
+            <div className="check">
             <input
               id={id}
               className='checkbox'
@@ -62,6 +63,7 @@ function Tasks({
               checked={isDone}
               onChange={() => handleChangeStatus(id)}
             />
+            </div>
             <div className='task'>
               <span
                 onDoubleClick={() => {
