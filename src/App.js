@@ -24,7 +24,6 @@ function App() {
   const itemPerPage = 5;
 
   const filterTodos = () => todos.filter(filterMap[filter]);
-  console.log(filterTodos());
 
   const indexOfLastTask = currentPage * itemPerPage;
   const indexOfFirstTask = indexOfLastTask - itemPerPage;
@@ -34,9 +33,11 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
   ////////////////////////////////////////
 
   ////////////////////////////////////////
+  
   // add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
@@ -145,7 +146,7 @@ function App() {
             isEditing={isEditing}
           />
         </div>
-        {todos.length !== 0 ? (
+        {filterTodos().length !== 0 ? (
           <Pages
             paginate={paginate}
             filter={filter}
