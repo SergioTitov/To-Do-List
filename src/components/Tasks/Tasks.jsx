@@ -8,8 +8,10 @@ function Tasks({
   editTodo,
   filterMap,
   filter,
+  setEditing
+  ,isEditing
 }) {
-  const [isEditing, setEditing] = useState(false);
+  
   const [newText, setNewText] = useState("");
 
   function handleChange(e) {
@@ -24,11 +26,10 @@ function Tasks({
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
-        isEditing === id ? (
+        isEditing === id ? ( 
           <div className='tasks' key={id}>
             <form
               onSubmit={(e) => {
-                console.log(id);
                 e.preventDefault();
                 editTodo(id, newText);
                 setNewText("");
@@ -64,7 +65,6 @@ function Tasks({
             <div className='task'>
               <span
                 onDoubleClick={() => {
-                  // console.log(id);
                   setEditing(id);
                 }}
               >

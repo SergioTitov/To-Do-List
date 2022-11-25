@@ -14,6 +14,7 @@ const filterMap = {
   Done: (todo) => todo.isDone,
   Undone: (todo) => !todo.isDone,
 };
+
 const filterNames = Object.keys(filterMap);
 
 function App() {
@@ -22,12 +23,20 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 5;
 
+  const filterTodos = () => todos.filter(filterMap[filter]);
+  console.log(filterTodos());
+
   const indexOfLastTask = currentPage * itemPerPage;
   const indexOfFirstTask = indexOfLastTask - itemPerPage;
-  const currentTask = todos.slice(indexOfFirstTask, indexOfLastTask);
+  const currentTask = filterTodos().slice(indexOfFirstTask, indexOfLastTask);
+
+  const [isEditing, setEditing] = useState(false);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  ////////////////////////////////////////
+
+  ////////////////////////////////////////
   // add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
@@ -90,14 +99,11 @@ function App() {
     });
     setTodos(updatedTodos);
   };
-  
+
   // editing on doubleClick
   function editTodo(id, newName) {
     const editedTodoList = todos.map((todo) => {
-      console.log(id);
       if (id === todo.id) {
-        console.log(newName);
-        console.log(todo);
         return { ...todo, text: newName };
       }
       return todo;
@@ -115,7 +121,6 @@ function App() {
       setCurrentPage={setCurrentPage}
     />
   ));
-  console.log(todos);
 
   return (
     <div className='App'>
@@ -136,6 +141,8 @@ function App() {
             editTodo={editTodo}
             filterMap={filterMap}
             filter={filter}
+            setEditing={setEditing}
+            isEditing={isEditing}
           />
         </div>
         {todos.length !== 0 ? (
@@ -143,7 +150,7 @@ function App() {
             paginate={paginate}
             filter={filter}
             itemPerPage={itemPerPage}
-            totaItems={todos.length}
+            totaItems={filterTodos().length}
             currentPage={currentPage}
           />
         ) : (
