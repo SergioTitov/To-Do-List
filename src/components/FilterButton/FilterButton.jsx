@@ -1,11 +1,10 @@
 import React from "react";
 
 function FilterButton({ name, isPressed, setFilter, setCurrentPage }) {
-
-const onFirstPage = () => {
-  setFilter(name);
-  setCurrentPage(1);
-}
+  const onFirstPage = () => {
+    setFilter(name);
+    setCurrentPage(1);
+  };
 
   return (
     <button

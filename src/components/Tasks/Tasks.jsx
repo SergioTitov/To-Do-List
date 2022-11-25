@@ -8,10 +8,9 @@ function Tasks({
   editTodo,
   filterMap,
   filter,
-  setEditing
-  ,isEditing
+  setEditing,
+  isEditing,
 }) {
-  
   const [newText, setNewText] = useState("");
 
   function handleChange(e) {
@@ -26,7 +25,7 @@ function Tasks({
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
-        isEditing === id ? ( 
+        isEditing === id ? (
           <div className='tasks' key={id}>
             <form
               onSubmit={(e) => {
@@ -55,14 +54,14 @@ function Tasks({
           </div>
         ) : (
           <div className='tasks' key={id}>
-            <div className="check">
-            <input
-              id={id}
-              className='checkbox'
-              type='checkbox'
-              checked={isDone}
-              onChange={() => handleChangeStatus(id)}
-            />
+            <div className='check'>
+              <input
+                id={id}
+                className='checkbox'
+                type='checkbox'
+                checked={isDone}
+                onChange={() => handleChangeStatus(id)}
+              />
             </div>
             <div className='task'>
               <span

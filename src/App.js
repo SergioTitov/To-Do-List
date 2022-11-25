@@ -38,10 +38,6 @@ function App() {
     setCurrentPage(currentPage - 1);
   }
 
-  ////////////////////////////////////////
-
-  ////////////////////////////////////////
-
   // add new task
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
