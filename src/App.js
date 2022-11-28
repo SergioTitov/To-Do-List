@@ -8,16 +8,30 @@ import ArrowUp from "./components/ArrowUp/ArrowUp";
 import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
+import axios from "axios";
+
+// Add new task axios
+// const postAxios = "https://todo-api-learning.herokuapp.com/v1/task/7"
+
+// const afsd = `https://todo-api-learning.herokuapp.com/v1/tasks/7?filterBy=${}&order=desc&pp=5&page=1`
+// .then((response) => {
+//   setTodos(response.data)
+// })
+// const baseUrl = "https://todo-api-learning.herokuapp.com/v1/tasks/7?pp=5&page=1";
 
 const filterMap = {
   All: () => true,
-  Done: (todo) => todo.isDone,
-  Undone: (todo) => !todo.isDone,
+  Done: (todo) => todo.done,
+  Undone: (todo) => !todo.done,
 };
 
 const filterNames = Object.keys(filterMap);
 
 function App() {
+  // axios.get(baseUrl).then((res) => {
+  //   console.log(res);
+  // });
+
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,15 +56,15 @@ function App() {
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
       const newTask = {
-        text: todoText,
-        id: Date.now(),
+        name: todoText,
+        uuid: Date.now(),
         date: new Date(),
-        isDone: false,
+        done: false,
       };
       setTodos(
         [newTask, ...todos].filter(
           (value, index, todos) =>
-            index === todos.findLastIndex((item) => item.text === value.text)
+            index === todos.findLastIndex((item) => item.name === value.name)
         )
       );
     }
@@ -85,21 +99,21 @@ function App() {
   };
 
   // delete one task
-  const deleteTodo = (id) => {
-    const newTodos = todos.filter((item) => item.id !== id);
+  const deleteTodo = (uuid) => {
+    const newTodos = todos.filter((item) => item.uuid !== uuid);
     setTodos(newTodos);
   };
 
   //Change done and undone
-  const handleChangeStatus = (id) => {
+  const handleChangeStatus = (uuid) => {
     // let [obj] = todos.filter((item) => item.id === id);
     // obj.isDone = !isDone;
     // let todosClone = [...todos];
     // todosClone[todos.findIndex((item) => item.id === id)] = obj;
     // setTodos([...todosClone]);
     const updatedTodos = todos.map((todo) => {
-      if (id === todo.id) {
-        return { ...todo, isDone: !todo.isDone };
+      if (uuid === todo.uuid) {
+        return { ...todo, done: !todo.done };
       }
       return todo;
     });
@@ -107,10 +121,10 @@ function App() {
   };
 
   // editing on doubleClick
-  function editTodo(id, newName) {
+  function editTodo(uuid, newName) {
     const editedTodoList = todos.map((todo) => {
-      if (id === todo.id && newName.trim() !== "") {
-        return { ...todo, text: newName };
+      if (uuid === todo.uuid && newName.trim() !== "") {
+        return { ...todo, name: newName };
       }
       return todo;
     });

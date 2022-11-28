@@ -20,12 +20,12 @@ function Form({ addTodo }) {
         className='input'
         type='text'
         placeholder='Add new todo'
-        id='todo-input'
+        uuid='todo-input'
         value={input}
-        name='text'
+        name='name'
         onChange={handleChange}
       />
-      <button className='add-button' id='add-button'>
+      <button className='add-button' uuid='add-button'>
         Add
       </button>
     </form>

@@ -24,24 +24,24 @@ function Tasks({
 
   return (
     <div>
-      {todos.filter(filterMap[filter]).map(({ text, id, date, isDone }) =>
-        isEditing === id ? (
-          <div className='tasks' key={id}>
+      {todos.filter(filterMap[filter]).map(({ name, uuid, date, done }) =>
+        isEditing === uuid ? (
+          <div className='tasks' key={uuid}>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                editTodo(id, newText);
+                editTodo(uuid, newText);
                 setNewText("");
                 setEditing("");
               }}
             >
               <div>
                 <input
-                  key={id}
+                  key={uuid}
                   placeholder='edit todo'
                   value={newText}
                   onChange={handleChange}
-                  type='text'
+                  type='name'
                 />
               </div>
               <div>
@@ -53,23 +53,23 @@ function Tasks({
             </form>
           </div>
         ) : (
-          <div className='tasks' key={id}>
+          <div className='tasks' key={uuid}>
             <div className='check'>
               <input
-                id={id}
+                uuid={uuid}
                 className='checkbox'
                 type='checkbox'
-                checked={isDone}
-                onChange={() => handleChangeStatus(id)}
+                checked={done}
+                onChange={() => handleChangeStatus(uuid)}
               />
             </div>
             <div className='task'>
               <span
                 onDoubleClick={() => {
-                  setEditing(id);
+                  setEditing(uuid);
                 }}
               >
-                {text}
+                {name}
               </span>
             </div>
             <div className='task-date'>
@@ -78,7 +78,7 @@ function Tasks({
             <button
               className='delete-task'
               onClick={() => {
-                deleteTodo(id);
+                deleteTodo(uuid);
               }}
             />
           </div>
