@@ -117,7 +117,7 @@ function App() {
     setTodos(editedTodoList);
   }
 
-  // filtering by
+  // filtering by All, Done and Undone
   const filterList = filterNames.map((name) => (
     <FilterButton
       key={name}
