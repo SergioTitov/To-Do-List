@@ -11,24 +11,27 @@ function Tasks({
   setEditing,
   isEditing,
 }) {
-  const [newText, setNewText] = useState("");
+  const [nesText, setNesText] = useState("");
+  const [newText, setNewText] = useState(nesText);
 
   function handleChange(e) {
     setNewText(e.target.value);
   }
 
-  const notNewText = (e) => {
+  const  goOut = (e) => {
     setNewText("");
     setEditing(false);
     setEditing(e.target.blank);
   };
 
-  const ExitOnEsc = (e) => {
+  const GoOutOnEsc = (e) => {
     if (e.keyCode === 27) {
-      notNewText();
+      goOut();
     }
   };
 
+
+  
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
@@ -45,16 +48,18 @@ function Tasks({
               <div>
                 <input
                   autoFocus
-                  onKeyUp={ExitOnEsc}
+                  onKeyUp={GoOutOnEsc}
                   key={uuid}
                   placeholder='edit todo'
                   value={newText}
+                  defaultValue={nesText}
                   onChange={handleChange}
                   type='name'
+                  
                 />
               </div>
               <div>
-                <button type='button' onClick={notNewText}>
+                <button type='button' onClick={goOut}>
                   Cancel
                 </button>
                 <button type='submit'>Save</button>
@@ -76,6 +81,7 @@ function Tasks({
               <span
                 onDoubleClick={() => {
                   setEditing(uuid);
+                  setNesText(name);
                 }}
               >
                 {name}

@@ -15,6 +15,12 @@
   width: 20px;
   height: 20px;
 }
+input {
+  border-radius: 19px;
+  background: rgba(124, 117, 117, 0.651);
+  width: 240px;
+  padding-left: 10px;
+}
 span {
   word-break: break-all;
 }

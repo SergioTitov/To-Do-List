@@ -145,7 +145,7 @@ function App() {
   // editing on doubleClick
   function editTodo(uuid, newName) {
     const editedTodoList = todos.map((todo) => {
-      if (uuid === todo.uuid && newName.trim() !== "") {
+      if (uuid === todo.uuid && newName.trim() !== "" && newName !== todo.filter ) {
         return { ...todo, name: newName };
       }
       return todo;
