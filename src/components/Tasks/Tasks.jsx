@@ -20,17 +20,14 @@ function Tasks({
   const notNewText = (e) => {
     setNewText("");
     setEditing(false);
-    setEditing(e.target.blank)
+    setEditing(e.target.blank);
   };
 
-
-  const ExitOnEsc = (e)=>{
-if (e.keyCode ===27){
-  notNewText()
-}
-
-
-  }
+  const ExitOnEsc = (e) => {
+    if (e.keyCode === 27) {
+      notNewText();
+    }
+  };
 
   return (
     <div>
@@ -47,6 +44,7 @@ if (e.keyCode ===27){
             >
               <div>
                 <input
+                  autoFocus
                   onKeyUp={ExitOnEsc}
                   key={uuid}
                   placeholder='edit todo'
