@@ -17,14 +17,24 @@ function Tasks({
     setNewText(e.target.value);
   }
 
-  const notNewText = () => {
+  const notNewText = (e) => {
     setNewText("");
     setEditing(false);
+    setEditing(e.target.blank)
   };
+
+
+  const ExitOnEsc = (e)=>{
+if (e.keyCode ===27){
+  notNewText()
+}
+
+
+  }
 
   return (
     <div>
-      {todos.filter(filterMap[filter]).map(({ name, uuid, date, done }) =>
+      {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
           <div className='tasks' key={uuid}>
             <form
@@ -37,6 +47,7 @@ function Tasks({
             >
               <div>
                 <input
+                  onKeyUp={ExitOnEsc}
                   key={uuid}
                   placeholder='edit todo'
                   value={newText}
@@ -73,7 +84,7 @@ function Tasks({
               </span>
             </div>
             <div className='task-date'>
-              <span>{date.toLocaleString()}</span>
+              <span>{createdAt.toLocaleString()}</span>
             </div>
             <button
               className='delete-task'

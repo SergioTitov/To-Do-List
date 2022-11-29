@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -11,7 +11,10 @@ import FilterButton from "./components/FilterButton/FilterButton";
 import axios from "axios";
 
 // Add new task axios
-// const postAxios = "https://todo-api-learning.herokuapp.com/v1/task/7"
+// const postAxios = "https://todo-api-learning.herokuapp.com/v1/task/7";
+// axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((response) => {
+//   console.log(response.data);
+// });
 
 // const afsd = `https://todo-api-learning.herokuapp.com/v1/tasks/7?filterBy=${}&order=desc&pp=5&page=1`
 // .then((response) => {
@@ -28,10 +31,6 @@ const filterMap = {
 const filterNames = Object.keys(filterMap);
 
 function App() {
-  // axios.get(baseUrl).then((res) => {
-  //   console.log(res);
-  // });
-
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,13 +51,36 @@ function App() {
     setCurrentPage(currentPage - 1);
   }
 
+
+
+
+  // useEffect(()=>{
+  //   axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((data)=>{
+  //     console.log(data);
+  //     debugger
+  //   })
+  // }, [])
+
+
+
+  // .then((response) => {
+  //   setTodos(response.data)
+  // })
+
   // add new task
+
+  // axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((response) => {
+  //   addTodo(response.data)
+  //   });
+
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
       const newTask = {
         name: todoText,
         uuid: Date.now(),
-        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        // date: new Date(),
         done: false,
       };
       setTodos(
@@ -73,9 +95,9 @@ function App() {
   // Sort by date
   const dateDown = () => {
     const array = [...todos].sort((a, b) => {
-      if (a.date > b.date) {
+      if (a.createdAt > b.datcreatedAte) {
         return 1;
-      } else if (a.date === b.date) {
+      } else if (a.createdAt === b.createdAt) {
         return 0;
       } else {
         return -1;
@@ -87,9 +109,9 @@ function App() {
   // Sort by date
   const dateUp = () => {
     const array = [...todos].sort((a, b) => {
-      if (a.date < b.date) {
+      if (a.updatedAt < b.updatedAt) {
         return 1;
-      } else if (a.date === b.date) {
+      } else if (a.updatedAt === b.updatedAt) {
         return 0;
       } else {
         return -1;
@@ -163,6 +185,7 @@ function App() {
             filter={filter}
             setEditing={setEditing}
             isEditing={isEditing}
+           
           />
         </div>
         {filterTodos().length !== 0 ? (

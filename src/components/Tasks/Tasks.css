@@ -11,35 +11,10 @@
 .task {
   width: 650px;
 }
-.check {
-  display: flex;
-}
-input {
-  border-radius: 19px;
-  background: rgba(124, 117, 117, 0.651);
-  width: 240px;
-  padding-left: 10px;
-}
 .checkbox {
   width: 20px;
   height: 20px;
-  background: transparent;
 }
-.checkbox::before {
-  border-radius: 19px;
-  background: rgba(124, 117, 117, 1);
-  box-sizing: content-box;
-  content: close-quote;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  overflow: hidden;
-}
-
-.checkbox:checked:before {
-  background-color: rgb(31, 28, 28);
-}
-
 span {
   word-break: break-all;
 }
@@ -53,7 +28,6 @@ span {
 .task-date {
   width: 90px;
 }
-
 @media (max-width: 950px) {
   .tasks {
     width: 400px;

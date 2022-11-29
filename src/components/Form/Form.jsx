@@ -8,6 +8,9 @@ function Form({ addTodo }) {
     setInput(e.target.value);
   };
 
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addTodo(input);
