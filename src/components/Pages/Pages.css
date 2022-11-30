@@ -1,8 +1,8 @@
-.pages {
+/* .pages {
   display: flex;
   width: 800px;
   justify-content: space-between;
-}
+} */
 .page {
   width: 70px;
   height: 30px;
@@ -18,11 +18,11 @@
   width: 45px;
   height: 30px;
 }
-.pages_left_notActive {
+/* .pages_left_notActive {
   background: transparent;
   border: none !important;
   font-size: 0;
-}
+} */
 @media (max-width: 950px) {
   .pages {
     width: 400px;

@@ -1,29 +1,29 @@
-.tasks {
+/* .tasks {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  /* margin-bottom: 10px; */
-  /* min-height: 55px; */
-  /* width: 800px; */
-  background-color: rgb(47, 79, 79);
-}
-.task {
+  align-items: center; 
+  margin-bottom: 10px;
+   min-height: 55px; 
+   width: 800px; 
+   background-color: rgb(47, 79, 79);
+} */
+/* .task {
   width: 650px;
-}
-.checkbox {
+} */
+/* .checkbox {
   width: 20px;
   height: 20px;
-}
+} */
 input {
   border-radius: 19px;
   background: rgba(124, 117, 117, 0.651);
   width: 240px;
   padding-left: 10px;
 }
-span {
+/* span {
   word-break: break-all;
-}
+} */
 .delete-task {
   background: url(/src/assets/trash.png) 0 0 /100% auto no-repeat;
   height: 20px;
@@ -31,9 +31,9 @@ span {
   margin-left: 5px;
   color: aliceblue;
 }
-.task-date {
+/* .task-date {
   width: 90px;
-}
+} */
 @media (max-width: 950px) {
   .tasks {
     width: 400px;

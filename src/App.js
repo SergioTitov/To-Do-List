@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -8,20 +8,7 @@ import ArrowUp from "./components/ArrowUp/ArrowUp";
 import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
-import axios from "axios";
-import { ChakraProvider } from '@chakra-ui/react'
-
-// Add new task axios
-// const postAxios = "https://todo-api-learning.herokuapp.com/v1/task/7";
-// axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((response) => {
-//   console.log(response.data);
-// });
-
-// const afsd = `https://todo-api-learning.herokuapp.com/v1/tasks/7?filterBy=${}&order=desc&pp=5&page=1`
-// .then((response) => {
-//   setTodos(response.data)
-// })
-// const baseUrl = "https://todo-api-learning.herokuapp.com/v1/tasks/7?pp=5&page=1";
+import { Box } from "@chakra-ui/react";
 
 const filterMap = {
   All: () => true,
@@ -52,28 +39,7 @@ function App() {
     setCurrentPage(currentPage - 1);
   }
 
-
-
-
-  // useEffect(()=>{
-  //   axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((data)=>{
-  //     console.log(data);
-  //     debugger
-  //   })
-  // }, [])
-
-
-
-  // .then((response) => {
-  //   setTodos(response.data)
-  // })
-
   // add new task
-
-  // axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((response) => {
-  //   addTodo(response.data)
-  //   });
-
   const addTodo = (todoText) => {
     if (todoText.trim() !== "") {
       const newTask = {
@@ -129,11 +95,6 @@ function App() {
 
   //Change done and undone
   const handleChangeStatus = (uuid) => {
-    // let [obj] = todos.filter((item) => item.id === id);
-    // obj.isDone = !isDone;
-    // let todosClone = [...todos];
-    // todosClone[todos.findIndex((item) => item.id === id)] = obj;
-    // setTodos([...todosClone]);
     const updatedTodos = todos.map((todo) => {
       if (uuid === todo.uuid) {
         return { ...todo, done: !todo.done };
@@ -146,7 +107,11 @@ function App() {
   // editing on doubleClick
   function editTodo(uuid, newName) {
     const editedTodoList = todos.map((todo) => {
-      if (uuid === todo.uuid && newName.trim() !== "" && newName !== todo.filter ) {
+      if (
+        uuid === todo.uuid &&
+        newName.trim() !== "" &&
+        newName !== todo.filter
+      ) {
         return { ...todo, name: newName };
       }
       return todo;
@@ -166,18 +131,17 @@ function App() {
   ));
 
   return (
-    <ChakraProvider>
-    <div className='App'>
-      <div className='main'>
+    <Box className='App'>
+      <Box className='main'>
         <Title />
         <Form addTodo={addTodo} />
-        <div className='tasks-buttons'>
+        <Box className='tasks-buttons'>
           {filterList}
           <SortByDate />
           <ArrowUp dateUp={dateUp} />
           <ArrowDown dateDown={dateDown} />
-        </div>
-        <div className='tasks-task'>
+        </Box>
+        <Box className='tasks-task'>
           <Tasks
             todos={currentTask}
             deleteTodo={deleteTodo}
@@ -187,9 +151,8 @@ function App() {
             filter={filter}
             setEditing={setEditing}
             isEditing={isEditing}
-           
           />
-        </div>
+        </Box>
         {filterTodos().length !== 0 ? (
           <Pages
             paginate={paginate}
@@ -201,9 +164,8 @@ function App() {
         ) : (
           <h3>Tasks not found</h3>
         )}
-      </div>
-    </div>
-    </ChakraProvider>
+      </Box>
+    </Box>
   );
 }
 

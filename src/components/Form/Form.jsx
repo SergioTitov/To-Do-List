@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./Form.css";
+// import "./Form.css";
+import { Button, Input} from "@chakra-ui/react";
 
 function Form({ addTodo }) {
   const [input, setInput] = useState("");
@@ -8,9 +9,6 @@ function Form({ addTodo }) {
     setInput(e.target.value);
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     addTodo(input);
@@ -18,8 +16,18 @@ function Form({ addTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit}
+    >
+      <Input
+        w='710px'
+        h='30px'
+        borderRadius='4px'
+        mb='30px'
+        mr='5px'
+        
+        wordBreak='break-all'
+        bg='rgba(124, 117, 117, 0.651)'
+        paddingLeft='10px'
         className='input'
         type='text'
         placeholder='Add new todo'
@@ -28,9 +36,9 @@ function Form({ addTodo }) {
         name='name'
         onChange={handleChange}
       />
-      <button className='add-button' uuid='add-button'>
+      <Button className='add-button' uuid='add-button'>
         Add
-      </button>
+      </Button>
     </form>
   );
 }
