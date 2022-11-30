@@ -51,17 +51,12 @@ function App() {
     setCurrentPage(currentPage - 1);
   }
 
-
-
-
   // useEffect(()=>{
   //   axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((data)=>{
   //     console.log(data);
   //     debugger
   //   })
   // }, [])
-
-
 
   // .then((response) => {
   //   setTodos(response.data)
@@ -73,24 +68,41 @@ function App() {
   //   addTodo(response.data)
   //   });
 
+  const baseURL = "https://todo-api-learning.herokuapp.com/v1/task/7";
+
   const addTodo = (todoText) => {
-    if (todoText.trim() !== "") {
-      const newTask = {
+    axios
+      .post(baseURL, {
         name: todoText,
-        uuid: Date.now(),
+        done: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-        // date: new Date(),
-        done: false,
-      };
-      setTodos(
-        [newTask, ...todos].filter(
-          (value, index, todos) =>
-            index === todos.findLastIndex((item) => item.name === value.name)
-        )
-      );
-    }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setTodos([response.data, ...todos]);
+        console.log(todos);
+      });
   };
+  console.log(todos);
+  // const addTodo = (todoText) => {
+  //   if (todoText.trim() !== "") {
+  //     const newTask = {
+  //       name: todoText,
+  //       uuid: Date.now(),
+  //       createdAt: new Date(),
+  //       updatedAt: new Date(),
+  //       // date: new Date(),
+  //       done: false,
+  //     };
+  //     setTodos(
+  //       [newTask, ...todos].filter(
+  //         (value, index, todos) =>
+  //           index === todos.findLastIndex((item) => item.name === value.name)
+  //       )
+  //     );
+  //   }
+  // };
 
   // Sort by date
   const dateDown = () => {
@@ -145,7 +157,11 @@ function App() {
   // editing on doubleClick
   function editTodo(uuid, newName) {
     const editedTodoList = todos.map((todo) => {
-      if (uuid === todo.uuid && newName.trim() !== "" && newName !== todo.filter ) {
+      if (
+        uuid === todo.uuid &&
+        newName.trim() !== "" &&
+        newName !== todo.filter
+      ) {
         return { ...todo, name: newName };
       }
       return todo;
@@ -185,7 +201,6 @@ function App() {
             filter={filter}
             setEditing={setEditing}
             isEditing={isEditing}
-           
           />
         </div>
         {filterTodos().length !== 0 ? (
