@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./Tasks.css";
+
+import { Box } from "@chakra-ui/react";
 
 function Tasks({
   todos,
@@ -18,7 +19,7 @@ function Tasks({
     setNewText(e.target.value);
   }
 
-  const  goOut = (e) => {
+  const goOut = (e) => {
     setNewText("");
     setEditing(false);
     setEditing(e.target.blank);
@@ -30,13 +31,18 @@ function Tasks({
     }
   };
 
-
-  
   return (
     <div>
       {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
-          <div className='tasks' key={uuid}>
+          <Box
+            className='tasks'
+            textAlign='center'
+            mb={10}
+            minH={55}
+            w={800}
+            key={uuid}
+          >
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -55,7 +61,6 @@ function Tasks({
                   defaultValue={nesText}
                   onChange={handleChange}
                   type='name'
-                  
                 />
               </div>
               <div>
@@ -65,7 +70,7 @@ function Tasks({
                 <button type='submit'>Save</button>
               </div>
             </form>
-          </div>
+          </Box>
         ) : (
           <div className='tasks' key={uuid}>
             <div className='check'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -9,6 +9,7 @@ import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
 import axios from "axios";
+import { ChakraProvider } from '@chakra-ui/react'
 
 // Add new task axios
 // const postAxios = "https://todo-api-learning.herokuapp.com/v1/task/7";
@@ -165,6 +166,7 @@ function App() {
   ));
 
   return (
+    <ChakraProvider>
     <div className='App'>
       <div className='main'>
         <Title />
@@ -201,6 +203,7 @@ function App() {
         )}
       </div>
     </div>
+    </ChakraProvider>
   );
 }
 
