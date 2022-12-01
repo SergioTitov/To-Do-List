@@ -3,17 +3,15 @@ import React, { useState } from "react";
 import {
   Box,
   Flex,
-  EditableInput,
-  Editable,
-  EditableTextarea,
-  EditablePreview,
   Input,
   Text,
   Button,
   Checkbox,
   IconButton,
+  interactivity,
+  GridItem,
 } from "@chakra-ui/react";
-import { DeleteIcon} from '@chakra-ui/icons';
+import { DeleteIcon } from "@chakra-ui/icons";
 function Tasks({
   todos,
   deleteTodo,
@@ -45,79 +43,86 @@ function Tasks({
 
   return (
     <Box>
+      {console.log(todos)}
       {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
-          <Flex>
-            <Box
-              bgColor='rgb(47, 79, 79)'
-              mb={10}
+          <Flex
+            w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
+            bgColor='rgb(47, 79, 79)'
+            mb='10px'
+            display='flex'
+            flex-direction='row'
+            justify-content='center'
+            align-items='center'
+            key={uuid}
+            // className='tasks'
+          >
+            <form
               display='flex'
-              flex-direction='row'
-              justify-content='center'
-              align-items='center'
-              minH={55}
-              w={800}
-              className='tasks'
-              key={uuid}
+              flexDirection='colomn'
+              justifyContent='center'
+              alignItems='center'
+              flexWrap='nowrap'
+              onSubmit={(e) => {
+                e.preventDefault();
+                editTodo(uuid, newText);
+                setNewText("");
+                setEditing("");
+              }}
             >
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  editTodo(uuid, newText);
-                  setNewText("");
-                  setEditing("");
-                }}
-              >
+              <Box w={["xs", "xs", "sm", "md", "2xl", "3xl"]}>
+                <Input
+                  bgColor=' rgb(36, 61, 61)'
+                  color='white'
+                  h='31px'
+                  autoFocus
+                  onKeyUp={GoOutOnEsc}
+                  key={uuid}
+                  placeholder='edit todo'
+                  value={newText}
+                  onChange={handleChange}
+                  type='name'
+                />
                 <Box>
-                  <Editable textAlign='center'>
-                    <EditablePreview />
-                    <Input
-                      as={EditableInput}
-                      bgColor='white'
-                      autoFocus
-                      onKeyUp={GoOutOnEsc}
-                      key={uuid}
-                      placeholder='edit todo'
-                      value={newText}
-                      defaultValue={nesText}
-                      onChange={handleChange}
-                      type='name'
-                    />
-                    <EditableTextarea />
-                  </Editable>
-                </Box>
-                <Box>
-                  <Button type='button' onClick={goOut}>
+                  <Button type='button' h='20px' mr={1} onClick={goOut}>
                     Cancel
                   </Button>
-                  <Button type='submit'>Save</Button>
+                  <Button type='submit' h='20px'>
+                    Save
+                  </Button>
                 </Box>
-              </form>
-            </Box>
+              </Box>
+            </form>
           </Flex>
         ) : (
-          <Box
-            bgColor='rgb(47, 79, 79)'
-            mb={5}
+          <Flex
+            w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
             display='flex'
             flexDirection='row'
             justifyContent='center'
             alignItems='center'
-            minH={55}
-            w={800}
-            className='tasks'
+            flexWrap='nowrap'
+            bgColor='rgb(47, 79, 79)'
+            mb='10px'
+            minH='55px'
+            // className='tasks'
             key={uuid}
           >
             <Checkbox
+              isChecked={done}
               ml={1}
               type='checkbox'
               colorScheme='green.100'
               uuid={uuid}
-              checked={done}
+              // checked={done}
               onChange={() => handleChangeStatus(uuid)}
             ></Checkbox>
-            <Box w={630} className='task'>
+            <Box
+              w={630}
+              //  className='task'
+            >
               <Text
+                color='white'
                 wordBreak='break-all'
                 onDoubleClick={() => {
                   setEditing(uuid);
@@ -127,22 +132,27 @@ function Tasks({
                 {name}
               </Text>
             </Box>
-            <Box w={90} mt={0} mb={0} className='task-date'>
+            <Box
+              color='white'
+              w={130}
+              mt={0}
+              mb={0}
+              // className='task-date'
+            >
               <Text>{createdAt.toLocaleString()}</Text>
             </Box>
 
             <IconButton
               icon={<DeleteIcon />}
               padding={0}
-              w='20px'
               h='20px'
               ml='5px'
-              className='delete-task'
+              // className='delete-task'
               onClick={() => {
                 deleteTodo(uuid);
               }}
             />
-          </Box>
+          </Flex>
         )
       )}
     </Box>

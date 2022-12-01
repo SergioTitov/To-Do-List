@@ -13,21 +13,21 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
   return (
     <Box
       display='flex'
-      width='800px'
+      w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
       justifyContent='space-between'
-      className='pages'
+      // className='pages'
     >
       {pageNumbers.length === 1 ? (
         <Button
           background='transparent'
           border='none !important'
           fontSize='0'
-          className='pages_left_notActive'
+          // className='pages_left_notActive'
         />
       ) : (
         <IconButton
         icon={<ArrowLeftIcon />}
-          className='page_left'
+          // className='page_left'
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage <= 1}
         />
@@ -40,7 +40,7 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
           }}
           onClick={() => paginate(number)}
           key={number}
-          className='page'
+          // className='page'
         >
           {number}
         </Button>
@@ -51,12 +51,12 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
           background='transparent'
           border='none !important'
           fontSize='0'
-          className='pages_left_notActive'
+          // className='pages_left_notActive'
         />
       ) : (
         <IconButton
         icon={<ArrowRightIcon />}
-          className='page_right'
+          // className='page_right'
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage >= pageNumbers.length}
         />

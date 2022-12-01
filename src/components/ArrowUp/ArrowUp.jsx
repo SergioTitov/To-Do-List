@@ -7,6 +7,7 @@ function ArrowUp({ dateUp }) {
   return (
     <Box>
       <IconButton
+      mr={1} ml={1}
         icon={<ArrowUpIcon />}
         className='ArrowUp'
         onClick={() => {

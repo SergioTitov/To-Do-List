@@ -8,7 +8,7 @@ import ArrowUp from "./components/ArrowUp/ArrowUp";
 import ArrowDown from "./components/ArrowDown/ArrowDown";
 import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 const filterMap = {
   All: () => true,
@@ -131,17 +131,60 @@ function App() {
   ));
 
   return (
-    <Box className='App'>
-      <Box className='main'>
+    <Box
+      bgColor=' rgb(36, 61, 61)'
+      h='100vh'
+      display='flex'
+      flexDirection='column'
+      justifyContent='flex-start'
+      alignItems='center'
+      textAlign='center'
+      bgSize='100% auto'
+      // className='App'
+    >
+      <Box
+        pl='35px'
+        pr='35px'
+        mt='60px'
+        padding
+        w='auto'
+        h='700px'
+        backgroundImage='url(/assets/backgr.jpg)'
+        backgroundPosition='center'
+        backgroundRepeat='no-repeat'
+        // className='main'
+      >
         <Title />
         <Form addTodo={addTodo} />
-        <Box className='tasks-buttons'>
-          {filterList}
-          <SortByDate />
-          <ArrowUp dateUp={dateUp} />
-          <ArrowDown dateDown={dateDown} />
+        <Box
+          w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
+          display='flex'
+          flexDirection='row'
+          justifyContent='space-between'
+          alignItems='center'
+          flexWrap='nowrap'
+          mb='10px'
+          // className='tasks-buttons'
+        >
+          <Box display='flex' flexWrap='nowrap'>
+            {filterList}
+          </Box>
+          <Box
+            display='flex'
+            flexDirection='row'
+            justifyContent='flex-end'
+            alignItems='center'
+            flexWrap='nowrap'
+            mb='10px'
+          >
+            <SortByDate />
+            <ArrowUp dateUp={dateUp} />
+            <ArrowDown dateDown={dateDown} />
+          </Box>
         </Box>
-        <Box className='tasks-task'>
+        <Box
+        //  className='tasks-task'
+        >
           <Tasks
             todos={currentTask}
             deleteTodo={deleteTodo}
@@ -162,7 +205,7 @@ function App() {
             currentPage={currentPage}
           />
         ) : (
-          <h3>Tasks not found</h3>
+          <Text color='white'>Tasks not found</Text>
         )}
       </Box>
     </Box>

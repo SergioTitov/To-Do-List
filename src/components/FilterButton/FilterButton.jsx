@@ -9,6 +9,8 @@ function FilterButton({ name, isPressed, setFilter, setCurrentPage }) {
 
   return (
     <Button
+    padding={1}
+    mr={1}
       type='button'
       aria-pressed={isPressed}
       onClick={onFirstPage}
