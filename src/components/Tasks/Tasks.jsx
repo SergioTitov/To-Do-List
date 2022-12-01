@@ -8,8 +8,7 @@ import {
   Button,
   Checkbox,
   IconButton,
-  interactivity,
-  GridItem,
+ 
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 function Tasks({
