@@ -154,7 +154,7 @@ function App() {
 
   function deleteTodo(uuid) {
     axios.delete(`${baseURL}task/7/${uuid}`).then(() => {
-      // setTodos(null);
+      getTodos();
     });
   }
 
