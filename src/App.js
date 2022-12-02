@@ -152,6 +152,8 @@ function App() {
         backgroundImage='url(/assets/backgr.jpg)'
         backgroundPosition='center'
         backgroundRepeat='no-repeat'
+        bgSize='100% auto'
+        
         // className='main'
       >
         <Title />
