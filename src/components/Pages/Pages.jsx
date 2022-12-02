@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import "./Pages.css";
+// import "./Pages.css";
+import { Box, Button, IconButton } from "@chakra-ui/react";
+import { ArrowLeftIcon,ArrowRightIcon } from "@chakra-ui/icons";
 
 function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
   const pageNumbers = [];
@@ -9,40 +11,57 @@ function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
   }
 
   return (
-    <div className='pages'>
+    <Box
+      display='flex'
+      w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
+      justifyContent='space-between'
+      // className='pages'
+    >
       {pageNumbers.length === 1 ? (
-        <button className='pages_left_notActive' />
+        <Button
+          background='transparent'
+          border='none !important'
+          fontSize='0'
+          // className='pages_left_notActive'
+        />
       ) : (
-        <button
-          className='page_left'
+        <IconButton
+        icon={<ArrowLeftIcon />}
+          // className='page_left'
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage <= 1}
         />
       )}
       {pageNumbers.map((number) => (
-        <button
+        <Button
           style={{
             color: currentPage === number ? "white" : "",
             backgroundColor: currentPage === number ? "rgb(47, 79, 79)" : "",
           }}
           onClick={() => paginate(number)}
           key={number}
-          className='page'
+          // className='page'
         >
           {number}
-        </button>
+        </Button>
       ))}
 
       {pageNumbers.length === 1 ? (
-        <button className='pages_left_notActive' />
+        <Button
+          background='transparent'
+          border='none !important'
+          fontSize='0'
+          // className='pages_left_notActive'
+        />
       ) : (
-        <button
-          className='page_right'
+        <IconButton
+        icon={<ArrowRightIcon />}
+          // className='page_right'
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage >= pageNumbers.length}
         />
       )}
-    </div>
+    </Box>
   );
 }
 

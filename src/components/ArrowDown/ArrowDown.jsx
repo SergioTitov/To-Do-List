@@ -1,16 +1,19 @@
 import React from "react";
-import "./ArrowDown.css";
+// import "./ArrowDown.css";
+import { Box, IconButton } from "@chakra-ui/react";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 
 function ArrowDown({ dateDown }) {
   return (
-    <div>
-      <button
+    <Box>
+      <IconButton
+        icon={<ArrowDownIcon />}
         className='ArrowDown'
         onClick={() => {
           dateDown();
         }}
       />
-    </div>
+    </Box>
   );
 }
 

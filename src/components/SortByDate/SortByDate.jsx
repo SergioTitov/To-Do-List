@@ -1,11 +1,14 @@
 import React from "react";
-import "./SortByDate.css";
+// import "./SortByDate.css";
+import { Box, Text } from "@chakra-ui/react";
 
-function SortByDate() {
+function SortByDate(dateUp, dateDown) {
   return (
-    <div>
-      <p className='Sort-by-date'>Sort By Date</p>
-    </div>
+    <Box display='flex' flexDirection='column' mr={1}>
+      <Text h='30px' color='white' className='Sort-by-date'>
+        Sort By Date
+      </Text>
+    </Box>
   );
 }
 

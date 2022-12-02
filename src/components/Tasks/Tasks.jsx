@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import "./Tasks.css";
 
+import {
+  Box,
+  Flex,
+  Input,
+  Text,
+  Button,
+  Checkbox,
+  IconButton,
+ 
+} from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 function Tasks({
   todos,
   deleteTodo,
@@ -18,7 +28,7 @@ function Tasks({
     setNewText(e.target.value);
   }
 
-  const  goOut = (e) => {
+  const goOut = (e) => {
     setNewText("");
     setEditing(false);
     setEditing(e.target.blank);
@@ -30,14 +40,28 @@ function Tasks({
     }
   };
 
-
-  
   return (
-    <div>
+    <Box>
+      {console.log(todos)}
       {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
-          <div className='tasks' key={uuid}>
+          <Flex
+            w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
+            bgColor='rgb(47, 79, 79)'
+            mb='10px'
+            display='flex'
+            flex-direction='row'
+            justify-content='center'
+            align-items='center'
+            key={uuid}
+            // className='tasks'
+          >
             <form
+              display='flex'
+              flexDirection='colomn'
+              justifyContent='center'
+              alignItems='center'
+              flexWrap='nowrap'
               onSubmit={(e) => {
                 e.preventDefault();
                 editTodo(uuid, newText);
@@ -45,61 +69,92 @@ function Tasks({
                 setEditing("");
               }}
             >
-              <div>
-                <input
+              <Box w={["xs", "xs", "sm", "md", "2xl", "3xl"]}>
+                <Input
+                  bgColor=' rgb(36, 61, 61)'
+                  color='white'
+                  h='31px'
                   autoFocus
                   onKeyUp={GoOutOnEsc}
                   key={uuid}
                   placeholder='edit todo'
                   value={newText}
-                  defaultValue={nesText}
                   onChange={handleChange}
                   type='name'
-                  
                 />
-              </div>
-              <div>
-                <button type='button' onClick={goOut}>
-                  Cancel
-                </button>
-                <button type='submit'>Save</button>
-              </div>
+                <Box>
+                  <Button type='button' h='20px' mr={1} onClick={goOut}>
+                    Cancel
+                  </Button>
+                  <Button type='submit' h='20px'>
+                    Save
+                  </Button>
+                </Box>
+              </Box>
             </form>
-          </div>
+          </Flex>
         ) : (
-          <div className='tasks' key={uuid}>
-            <div className='check'>
-              <input
-                uuid={uuid}
-                className='checkbox'
-                type='checkbox'
-                checked={done}
-                onChange={() => handleChangeStatus(uuid)}
-              />
-            </div>
-            <div className='task'>
-              <span
+          <Flex
+            w={["xs", "xs", "sm", "md", "2xl", "3xl"]}
+            display='flex'
+            flexDirection='row'
+            justifyContent='center'
+            alignItems='center'
+            flexWrap='nowrap'
+            bgColor='rgb(47, 79, 79)'
+            mb='10px'
+            minH='55px'
+            // className='tasks'
+            key={uuid}
+          >
+            <Checkbox
+              isChecked={done}
+              ml={1}
+              type='checkbox'
+              colorScheme='green.100'
+              uuid={uuid}
+              // checked={done}
+              onChange={() => handleChangeStatus(uuid)}
+            ></Checkbox>
+            <Box
+              w={630}
+              //  className='task'
+            >
+              <Text
+                color='white'
+                wordBreak='break-all'
                 onDoubleClick={() => {
                   setEditing(uuid);
                   setNesText(name);
                 }}
               >
                 {name}
-              </span>
-            </div>
-            <div className='task-date'>
-              <span>{createdAt.toLocaleString()}</span>
-            </div>
-            <button
-              className='delete-task'
+              </Text>
+            </Box>
+            <Box
+              color='white'
+              w={130}
+              mt={0}
+              mb={0}
+              // className='task-date'
+            >
+              <Text>{createdAt.toLocaleString()}</Text>
+            </Box>
+
+            <IconButton
+              icon={<DeleteIcon />}
+              padding={0}
+              h='20px'
+              ml='5px'
+              // className='delete-task'
               onClick={() => {
                 deleteTodo(uuid);
               }}
             />
-          </div>
+          </Flex>
         )
       )}
-    </div>
+    </Box>
   );
 }
 

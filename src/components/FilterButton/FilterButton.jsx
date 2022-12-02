@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@chakra-ui/react";
 
 function FilterButton({ name, isPressed, setFilter, setCurrentPage }) {
   const onFirstPage = () => {
@@ -7,7 +8,9 @@ function FilterButton({ name, isPressed, setFilter, setCurrentPage }) {
   };
 
   return (
-    <button
+    <Button
+    padding={1}
+    mr={1}
       type='button'
       aria-pressed={isPressed}
       onClick={onFirstPage}
@@ -17,7 +20,7 @@ function FilterButton({ name, isPressed, setFilter, setCurrentPage }) {
       }}
     >
       {name}
-    </button>
+    </Button>
   );
 }
 
