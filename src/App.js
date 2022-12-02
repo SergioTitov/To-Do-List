@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -68,7 +68,7 @@ function App() {
   //   addTodo(response.data)
   //   });
 
-  const baseURL = "https://todo-api-learning.herokuapp.com/v1/task/7";
+  const baseURL = "http://learning.alpacait.ru/v1/task/7";
 
   const addTodo = (todoText) => {
     axios
@@ -133,8 +133,18 @@ function App() {
   };
 
   // delete one task
+
+  // useEffect(() => {
+  //   async function deleteTodo(uuid) {
+  //     await axios.delete(`${baseURL}task/7/${uuid}`);
+  //   }
+  //   deleteTodo();
+  // }, []);
+
+  // delete one task
   const deleteTodo = (uuid) => {
     const newTodos = todos.filter((item) => item.uuid !== uuid);
+
     setTodos(newTodos);
   };
 
