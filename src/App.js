@@ -10,6 +10,7 @@ import Pages from "./components/Pages/Pages";
 import FilterButton from "./components/FilterButton/FilterButton";
 import { Box, Text } from "@chakra-ui/react";
 import axios from "axios";
+
 const filterMap = {
   All: () => true,
   Done: (todo) => todo.done,
@@ -196,7 +197,7 @@ function App() {
         backgroundPosition='center'
         backgroundRepeat='no-repeat'
         bgSize='100% auto'
-        
+
         // className='main'
       >
         <Title />
