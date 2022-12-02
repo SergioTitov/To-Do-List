@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Title from "./components/Title/Title";
 import Form from "./components/Form/Form";
@@ -57,23 +57,51 @@ function App() {
   //   addTodo(response.data)
   //   });
 
-  const baseURL = "http://learning.alpacait.ru/v1/task/7";
+  const baseURL = "http://learning.alpacait.ru:3000/v1/";
+
+  // useEffect(() => {
+  //   axios.get(`${baseURL}tasks/7`).then((response) => {
+  //     setTodos(response.data);
+  //   });
+  // }, []);
+
+
+///////////////////////// GET
+
+// API whith Get 
+
+  const [countTodos, setCountTodos] = useState();
+
+  const getTodos = () => {
+    axios.get(`${baseURL}tasks/7`).then((response) => {
+      setCountTodos(response.data.count);
+      console.log(countTodos);
+      setTodos(response.data.tasks);
+    });
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+////////////////////////////////
+
+// API whith Post
 
   const addTodo = (todoText) => {
     axios
-      .post(baseURL, {
+      .post(`${baseURL}task/7`, {
         name: todoText,
         done: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       })
       .then((response) => {
-        console.log(response.data);
         setTodos([response.data, ...todos]);
-        console.log(todos);
       });
   };
   console.log(todos);
+
+  /////////////////////////////////////////////////////////////////////////////////////
   // const addTodo = (todoText) => {
   //   if (todoText.trim() !== "") {
   //     const newTask = {
@@ -92,6 +120,7 @@ function App() {
   //     );
   //   }
   // };
+  /////////////////////////////////////////////////////////////////////////////////////
 
   // Sort by date
   const dateDown = () => {
@@ -121,22 +150,41 @@ function App() {
     setTodos(array);
   };
 
-  // delete one task
+  // API whith Delete
+
+  function deleteTodo(uuid) {
+    axios.delete(`${baseURL}task/7/${uuid}`).then(() => {
+      // setTodos(null);
+    });
+  }
 
   // useEffect(() => {
-  //   async function deleteTodo(uuid) {
-  //     await axios.delete(`${baseURL}task/7/${uuid}`);
-  //   }
   //   deleteTodo();
   // }, []);
 
+
+  // useEffect(() => {
+  //   function deleteTodo(uuid) {
+  //     axios
+  //       .delete(`${baseURL}task/7/${uuid}`)
+
+  //       .then(() => {
+  //         setTodos(null);
+  //       });
+  //   }
+
+  //   deleteTodo();
+  // }, []);
+
+  ///////////////////////////////////////////////////////////////
   // delete one task
-  const deleteTodo = (uuid) => {
-    const newTodos = todos.filter((item) => item.uuid !== uuid);
 
-    setTodos(newTodos);
-  };
+  // const deleteTodo = (uuid) => {
+  //   const newTodos = todos.filter((item) => item.uuid !== uuid);
 
+  //   setTodos(newTodos);
+  // };
+  /////////////////////////////////////////////////////////////////
   //Change done and undone
   const handleChangeStatus = (uuid) => {
     const updatedTodos = todos.map((todo) => {
