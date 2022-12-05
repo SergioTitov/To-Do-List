@@ -9,7 +9,7 @@ function ArrowUp({ dateUp }) {
       <IconButton
       mr={1} ml={1}
         icon={<ArrowUpIcon />}
-        className='ArrowUp'
+        // className='ArrowUp'
         onClick={() => {
           dateUp();
         }}

@@ -8,7 +8,6 @@ import {
   Button,
   Checkbox,
   IconButton,
- 
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 function Tasks({
@@ -42,7 +41,6 @@ function Tasks({
 
   return (
     <Box>
-      {console.log(todos)}
       {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
           <Flex
@@ -57,14 +55,14 @@ function Tasks({
             // className='tasks'
           >
             <form
-              display='flex'
-              flexDirection='colomn'
-              justifyContent='center'
-              alignItems='center'
-              flexWrap='nowrap'
+              // display='flex'
+              // flexDirection='colomn'
+              // justifyContent='center'
+              // alignItems='center'
+              // flexWrap='nowrap'
               onSubmit={(e) => {
                 e.preventDefault();
-                editTodo(uuid, newText);
+                editTodo(uuid, newText, done);
                 setNewText("");
                 setEditing("");
               }}

@@ -33,6 +33,8 @@ function App() {
 
   const [isEditing, setEditing] = useState(false);
 
+  // const [sorterBy, setSorterBy ] = useState(asc)
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // When delete all tasks on page automatically change page on -1
@@ -57,7 +59,6 @@ function App() {
   //   addTodo(response.data)
   //   });
 
-  const baseURL = "http://learning.alpacait.ru:3000/v1/";
 
   // useEffect(() => {
   //   axios.get(`${baseURL}tasks/7`).then((response) => {
@@ -65,31 +66,33 @@ function App() {
   //   });
   // }, []);
 
+  ///////////////////////// GET
 
-///////////////////////// GET
-
-// API whith Get 
+  // API whith Get
 
   const [countTodos, setCountTodos] = useState();
 
   const getTodos = () => {
-    axios.get(`${baseURL}tasks/7`).then((response) => {
-      setCountTodos(response.data.count);
-      console.log(countTodos);
-      setTodos(response.data.tasks);
-    });
+    axios
+      .get(
+        `${process.env.REACT_APP_URL}tasks/${process.env.REACT_APP_USERID}?filterBy=${filter}&order=asc&pp=${itemPerPage}&page=${currentPage}`
+      )
+      .then((response) => {
+        setCountTodos(response.data.count);
+        setTodos(response.data.tasks);
+      });
   };
 
   useEffect(() => {
     getTodos();
-  }, []);
-////////////////////////////////
+  }, [currentPage]);
+  ////////////////////////////////
 
-// API whith Post
+  // API whith Post
 
   const addTodo = (todoText) => {
     axios
-      .post(`${baseURL}task/7`, {
+      .post(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}`, {
         name: todoText,
         done: false,
         createdAt: new Date(),
@@ -99,7 +102,6 @@ function App() {
         setTodos([response.data, ...todos]);
       });
   };
-  console.log(todos);
 
   /////////////////////////////////////////////////////////////////////////////////////
   // const addTodo = (todoText) => {
@@ -123,6 +125,19 @@ function App() {
   /////////////////////////////////////////////////////////////////////////////////////
 
   // Sort by date
+
+
+  // const sortedArrayTodos = () => {
+  //   if (sorterBy === 'up'){
+  //     return dateUp();
+  //   } else if(sorterBy === 'down'){
+  //     return dateDown();
+  //   }
+  // }
+
+
+
+
   const dateDown = () => {
     const array = [...todos].sort((a, b) => {
       if (a.createdAt > b.datcreatedAte) {
@@ -139,9 +154,9 @@ function App() {
   // Sort by date
   const dateUp = () => {
     const array = [...todos].sort((a, b) => {
-      if (a.updatedAt < b.updatedAt) {
+      if (a.createdAt < b.createdAt) {
         return 1;
-      } else if (a.updatedAt === b.updatedAt) {
+      } else if (a.createdAt === b.createdAt) {
         return 0;
       } else {
         return -1;
@@ -153,7 +168,7 @@ function App() {
   // API whith Delete
 
   function deleteTodo(uuid) {
-    axios.delete(`${baseURL}task/7/${uuid}`).then(() => {
+    axios.delete(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`).then(() => {
       getTodos();
     });
   }
@@ -161,7 +176,6 @@ function App() {
   // useEffect(() => {
   //   deleteTodo();
   // }, []);
-
 
   // useEffect(() => {
   //   function deleteTodo(uuid) {
@@ -197,19 +211,35 @@ function App() {
   };
 
   // editing on doubleClick
-  function editTodo(uuid, newName) {
-    const editedTodoList = todos.map((todo) => {
-      if (
-        uuid === todo.uuid &&
-        newName.trim() !== "" &&
-        newName !== todo.filter
-      ) {
-        return { ...todo, name: newName };
-      }
-      return todo;
-    });
-    setTodos(editedTodoList);
+
+  function editTodo(uuid, newName, done) {
+    axios
+      .patch(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`, {
+        name: newName,
+        done: done,
+      })
+      .then(() => {
+        getTodos();
+      });
   }
+  //////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////
+  // editing on doubleClick
+  // function editTodo(uuid, newName) {
+  //   const editedTodoList = todos.map((todo) => {
+  //     if (
+  //       uuid === todo.uuid &&
+  //       newName.trim() !== "" &&
+  //       newName !== todo.filter
+  //     ) {
+  //       return { ...todo, name: newName };
+  //     }
+  //     return todo;
+  //   });
+  //   setTodos(editedTodoList);
+  // }
+  ///////////////////////////////////////////////////////
 
   // filtering by All, Done and Undone
   const filterList = filterNames.map((name) => (
