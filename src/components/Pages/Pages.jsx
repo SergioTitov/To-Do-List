@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { Box, Button, IconButton } from "@chakra-ui/react";
 import { ArrowLeftIcon,ArrowRightIcon } from "@chakra-ui/icons";
 
-function Pages({ itemPerPage, totaItems, paginate, currentPage }) {
+function Pages({ itemPerPage, countTodos, paginate, currentPage }) {
   const pageNumbers = [];
   useEffect(() => {});
-  for (let i = 1; i <= Math.ceil(totaItems / itemPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(countTodos / itemPerPage); i++) {
     pageNumbers.push(i);
+
   }
 
   return (

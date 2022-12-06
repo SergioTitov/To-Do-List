@@ -15,8 +15,6 @@ function Tasks({
   deleteTodo,
   handleChangeStatus,
   editTodo,
-  filterMap,
-  filter,
   setEditing,
   isEditing,
 }) {
@@ -41,7 +39,7 @@ function Tasks({
 
   return (
     <Box>
-      {todos.filter(filterMap[filter]).map(({ name, uuid, createdAt, done }) =>
+      {todos.map(({ name, uuid, createdAt, done }) =>
         isEditing === uuid ? (
           <Flex
             w={["xs", "xs", "sm", "md", "2xl", "3xl"]}

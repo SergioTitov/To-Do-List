@@ -27,26 +27,25 @@ function App() {
 
   const filterTodos = () => todos.filter(filterMap[filter]);
 
-  const indexOfLastTask = currentPage * itemPerPage;
-  const indexOfFirstTask = indexOfLastTask - itemPerPage;
-  const currentTask = filterTodos().slice(indexOfFirstTask, indexOfLastTask);
-
   const [isEditing, setEditing] = useState(false);
 
   const [sorterBy, setSorterBy] = useState("desc");
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // When delete all tasks on page automatically change page on -1
-  if (currentPage !== 1 && currentTask.length === 0) {
-    setCurrentPage(currentPage - 1);
-  }
+  const [countTodos, setCountTodos] = useState();
 
-  ///////////////////////// GET
+  // const indexOfLastTask = currentPage * itemPerPage;
+  // const indexOfFirstTask = indexOfLastTask - itemPerPage;
+  // const currentTask = filterTodos().slice(indexOfFirstTask, indexOfLastTask);
+
+
+    // When delete all tasks on page automatically change page on -1
+    // if (currentPage !== 1 && currentTask.length === 0) {
+    //   setCurrentPage(currentPage - 1);
+    // }
 
   // API whith Get
-
-  const [countTodos, setCountTodos] = useState();
 
   const getTodos = () => {
     axios
@@ -61,7 +60,7 @@ function App() {
 
   useEffect(() => {
     getTodos();
-  }, [sorterBy, currentPage]);
+  }, [sorterBy, currentPage, filter]);
 
   // API whith Post
 
@@ -78,7 +77,8 @@ function App() {
       )
       .then((response) => {
         setTodos([response.data, ...todos]);
-      });
+        getTodos();
+      }); //
   };
 
   /////////////////////////////////////////////////////////////////////////////////////
@@ -143,23 +143,6 @@ function App() {
       });
   }
 
-  // useEffect(() => {
-  //   deleteTodo();
-  // }, []);
-
-  // useEffect(() => {
-  //   function deleteTodo(uuid) {
-  //     axios
-  //       .delete(`${baseURL}task/7/${uuid}`)
-
-  //       .then(() => {
-  //         setTodos(null);
-  //       });
-  //   }
-
-  //   deleteTodo();
-  // }, []);
-
   ///////////////////////////////////////////////////////////////
   // delete one task
 
@@ -195,7 +178,6 @@ function App() {
         getTodos();
       });
   }
-  //////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////
   // editing on doubleClick
@@ -283,7 +265,7 @@ function App() {
         //  className='tasks-task'
         >
           <Tasks
-            todos={currentTask}
+            todos={todos}
             deleteTodo={deleteTodo}
             handleChangeStatus={handleChangeStatus}
             editTodo={editTodo}
@@ -298,7 +280,7 @@ function App() {
             paginate={paginate}
             filter={filter}
             itemPerPage={itemPerPage}
-            totaItems={filterTodos().length}
+            countTodos={countTodos}
             currentPage={currentPage}
           />
         ) : (
