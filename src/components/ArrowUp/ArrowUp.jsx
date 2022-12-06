@@ -3,16 +3,23 @@ import React from "react";
 import { Box, IconButton } from "@chakra-ui/react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
 
-function ArrowUp({ dateUp }) {
+
+
+function ArrowUp({ setSorterBy }) {
+
+
+  const upHamdler = ()=>{
+    setSorterBy('asc')
+  }
+  
+  
   return (
     <Box>
       <IconButton
       mr={1} ml={1}
         icon={<ArrowUpIcon />}
         // className='ArrowUp'
-        onClick={() => {
-          dateUp();
-        }}
+        onClick={upHamdler}
       />
     </Box>
   );

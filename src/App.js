@@ -33,7 +33,7 @@ function App() {
 
   const [isEditing, setEditing] = useState(false);
 
-  // const [sorterBy, setSorterBy ] = useState(asc)
+  const [sorterBy, setSorterBy] = useState("desc");
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -41,30 +41,6 @@ function App() {
   if (currentPage !== 1 && currentTask.length === 0) {
     setCurrentPage(currentPage - 1);
   }
-
-  // useEffect(()=>{
-  //   axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((data)=>{
-  //     console.log(data);
-  //     debugger
-  //   })
-  // }, [])
-
-  // .then((response) => {
-  //   setTodos(response.data)
-  // })
-
-  // add new task
-
-  // axios.get("https://todo-api-learning.herokuapp.com/v1/task/7").then((response) => {
-  //   addTodo(response.data)
-  //   });
-
-
-  // useEffect(() => {
-  //   axios.get(`${baseURL}tasks/7`).then((response) => {
-  //     setTodos(response.data);
-  //   });
-  // }, []);
 
   ///////////////////////// GET
 
@@ -75,7 +51,7 @@ function App() {
   const getTodos = () => {
     axios
       .get(
-        `${process.env.REACT_APP_URL}tasks/${process.env.REACT_APP_USERID}?filterBy=${filter}&order=asc&pp=${itemPerPage}&page=${currentPage}`
+        `${process.env.REACT_APP_URL}tasks/${process.env.REACT_APP_USERID}?filterBy=${filter}&order=${sorterBy}&pp=${itemPerPage}&page=${currentPage}`
       )
       .then((response) => {
         setCountTodos(response.data.count);
@@ -85,19 +61,21 @@ function App() {
 
   useEffect(() => {
     getTodos();
-  }, [currentPage]);
-  ////////////////////////////////
+  }, [sorterBy, currentPage]);
 
   // API whith Post
 
   const addTodo = (todoText) => {
     axios
-      .post(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}`, {
-        name: todoText,
-        done: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
+      .post(
+        `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}`,
+        {
+          name: todoText,
+          done: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }
+      )
       .then((response) => {
         setTodos([response.data, ...todos]);
       });
@@ -122,55 +100,47 @@ function App() {
   //     );
   //   }
   // };
+  ////////////////////////////////////////////////////////////////////////////////////////
+
   /////////////////////////////////////////////////////////////////////////////////////
-
   // Sort by date
+  // const dateDown = () => {
+  //   const array = [...todos].sort((a, b) => {
+  //     if (a.createdAt > b.datcreatedAte) {
+  //       return 1;
+  //     } else if (a.createdAt === b.createdAt) {
+  //       return 0;
+  //     } else {
+  //       return -1;
+  //     }
+  //   });
+  //   setTodos(array);
+  // };
 
-
-  // const sortedArrayTodos = () => {
-  //   if (sorterBy === 'up'){
-  //     return dateUp();
-  //   } else if(sorterBy === 'down'){
-  //     return dateDown();
-  //   }
-  // }
-
-
-
-
-  const dateDown = () => {
-    const array = [...todos].sort((a, b) => {
-      if (a.createdAt > b.datcreatedAte) {
-        return 1;
-      } else if (a.createdAt === b.createdAt) {
-        return 0;
-      } else {
-        return -1;
-      }
-    });
-    setTodos(array);
-  };
-
-  // Sort by date
-  const dateUp = () => {
-    const array = [...todos].sort((a, b) => {
-      if (a.createdAt < b.createdAt) {
-        return 1;
-      } else if (a.createdAt === b.createdAt) {
-        return 0;
-      } else {
-        return -1;
-      }
-    });
-    setTodos(array);
-  };
-
+  // // Sort by date
+  // const dateUp = () => {
+  //   const array = [...todos].sort((a, b) => {
+  //     if (a.createdAt < b.createdAt) {
+  //       return 1;
+  //     } else if (a.createdAt === b.createdAt) {
+  //       return 0;
+  //     } else {
+  //       return -1;
+  //     }
+  //   });
+  //   setTodos(array);
+  // };
+  ////////////////////////////////////////////////////////////////////////////////////
   // API whith Delete
 
   function deleteTodo(uuid) {
-    axios.delete(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`).then(() => {
-      getTodos();
-    });
+    axios
+      .delete(
+        `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`
+      )
+      .then(() => {
+        getTodos();
+      });
   }
 
   // useEffect(() => {
@@ -214,10 +184,13 @@ function App() {
 
   function editTodo(uuid, newName, done) {
     axios
-      .patch(`${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`, {
-        name: newName,
-        done: done,
-      })
+      .patch(
+        `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`,
+        {
+          name: newName,
+          done: done,
+        }
+      )
       .then(() => {
         getTodos();
       });
@@ -302,8 +275,8 @@ function App() {
             mb='10px'
           >
             <SortByDate />
-            <ArrowUp dateUp={dateUp} />
-            <ArrowDown dateDown={dateDown} />
+            <ArrowUp setSorterBy={setSorterBy} />
+            <ArrowDown setSorterBy={setSorterBy} />
           </Box>
         </Box>
         <Box
