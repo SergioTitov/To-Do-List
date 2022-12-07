@@ -21,11 +21,11 @@ const filterNames = Object.keys(filterMap);
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemPerPage = 5;
 
-  const filterTodos = () => todos.filter(filterMap[filter]);
+  // const filterTodos = () => todos.filter(filterMap[filter]);
 
   const [isEditing, setEditing] = useState(false);
 
@@ -39,11 +39,10 @@ function App() {
   // const indexOfFirstTask = indexOfLastTask - itemPerPage;
   // const currentTask = filterTodos().slice(indexOfFirstTask, indexOfLastTask);
 
-
-    // When delete all tasks on page automatically change page on -1
-    // if (currentPage !== 1 && currentTask.length === 0) {
-    //   setCurrentPage(currentPage - 1);
-    // }
+  // When delete all tasks on page automatically change page on -1
+  // if (currentPage !== 1 && currentTask.length === 0) {
+  //   setCurrentPage(currentPage - 1);
+  // }
 
   // API whith Get
 
@@ -55,6 +54,7 @@ function App() {
       .then((response) => {
         setCountTodos(response.data.count);
         setTodos(response.data.tasks);
+        setEditing(false);
       });
   };
 
@@ -139,6 +139,9 @@ function App() {
         `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`
       )
       .then(() => {
+        if ((currentPage !== 1 && todos.length === 1)) {
+          setCurrentPage((prev) => prev - 1);
+        }
         getTodos();
       });
   }
@@ -152,7 +155,7 @@ function App() {
   //   setTodos(newTodos);
   // };
   /////////////////////////////////////////////////////////////////
-  //Change done and undone
+  // Change done and undone
   const handleChangeStatus = (uuid) => {
     const updatedTodos = todos.map((todo) => {
       if (uuid === todo.uuid) {
@@ -163,6 +166,7 @@ function App() {
     setTodos(updatedTodos);
   };
 
+
   // editing on doubleClick
 
   function editTodo(uuid, newName, done) {
@@ -172,9 +176,12 @@ function App() {
         {
           name: newName,
           done: done,
+          
         }
+        
       )
       .then(() => {
+        console.log(done);
         getTodos();
       });
   }
@@ -275,7 +282,7 @@ function App() {
             isEditing={isEditing}
           />
         </Box>
-        {filterTodos().length !== 0 ? (
+        {countTodos ? (
           <Pages
             paginate={paginate}
             filter={filter}
