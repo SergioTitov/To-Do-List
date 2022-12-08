@@ -110,7 +110,7 @@ function Tasks({
               colorScheme='green.100'
               uuid={uuid}
               // checked={done}
-              onChange={() => handleChangeStatus(uuid)}
+              onChange={() => handleChangeStatus(uuid, done)}
             ></Checkbox>
             <Box
               w={630}

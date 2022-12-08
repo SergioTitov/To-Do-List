@@ -81,7 +81,6 @@ function App() {
         setTodos([response.data, ...todos]);
         getTodos();
       }); //
-      
   };
 
   /////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +135,7 @@ function App() {
   ////////////////////////////////////////////////////////////////////////////////////
   // API whith Delete
 
-  function deleteTodo(uuid) {
+  function deleteTodo (uuid) {
     axios
       .delete(
         `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`
@@ -159,15 +158,32 @@ function App() {
   // };
   /////////////////////////////////////////////////////////////////
   // Change done and undone
-  const handleChangeStatus = (uuid) => {
-    const updatedTodos = todos.map((todo) => {
-      if (uuid === todo.uuid) {
-        return { ...todo, done: !todo.done };
+  // const handleChangeStatus = (uuid) => {
+  //   const updatedTodos = todos.map((todo) => {
+  //     if (uuid === todo.uuid) {
+  //       return { ...todo, done: !todo.done };
+  //     }
+  //     return todo;
+  //   });
+  //   setTodos(updatedTodos);
+  // };
+
+  // Change done and undone whith API
+  const handleChangeStatus = (uuid, done)=>{
+    axios
+    .patch(
+      `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`,
+      {
+       done: !done
       }
-      return todo;
+    )
+    .then(() => {
+      console.log(done);
+      getTodos();
     });
-    setTodos(updatedTodos);
-  };
+}
+  
+
 
   // editing on doubleClick
 
@@ -182,7 +198,6 @@ function App() {
       )
       .then(() => {
         console.log(done);
-
         getTodos();
       });
   }
