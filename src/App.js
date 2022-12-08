@@ -47,7 +47,9 @@ function App() {
   // API whith Get
 
   const getTodos = () => {
+    setEditing(true);
     axios
+
       .get(
         `${process.env.REACT_APP_URL}tasks/${process.env.REACT_APP_USERID}?filterBy=${filter}&order=${sorterBy}&pp=${itemPerPage}&page=${currentPage}`
       )
@@ -79,6 +81,7 @@ function App() {
         setTodos([response.data, ...todos]);
         getTodos();
       }); //
+      
   };
 
   /////////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +142,7 @@ function App() {
         `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`
       )
       .then(() => {
-        if ((currentPage !== 1 && todos.length === 1)) {
+        if (currentPage !== 1 && todos.length === 1) {
           setCurrentPage((prev) => prev - 1);
         }
         getTodos();
@@ -166,7 +169,6 @@ function App() {
     setTodos(updatedTodos);
   };
 
-
   // editing on doubleClick
 
   function editTodo(uuid, newName, done) {
@@ -176,12 +178,11 @@ function App() {
         {
           name: newName,
           done: done,
-          
         }
-        
       )
       .then(() => {
         console.log(done);
+
         getTodos();
       });
   }
