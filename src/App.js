@@ -57,6 +57,12 @@ function App() {
         setCountTodos(response.data.count);
         setTodos(response.data.tasks);
         setEditing(false);
+      })
+
+      .catch((error) => {
+        if (error.response.filter === 400) {
+          alert("task not created");
+        }
       });
   };
 
@@ -80,7 +86,16 @@ function App() {
       .then((response) => {
         setTodos([response.data, ...todos]);
         getTodos();
-      }); //
+      })
+
+      .catch((error) => {
+        if (error.response.status === 422) {
+          alert("Not correct Task");
+          console.log(error.response);
+        } else if (error.response.status === 400) {
+          alert("Task already added");
+        }
+      });
   };
 
   /////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +150,7 @@ function App() {
   ////////////////////////////////////////////////////////////////////////////////////
   // API whith Delete
 
-  function deleteTodo (uuid) {
+  function deleteTodo(uuid) {
     axios
       .delete(
         `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`
@@ -169,21 +184,19 @@ function App() {
   // };
 
   // Change done and undone whith API
-  const handleChangeStatus = (uuid, done)=>{
+  const handleChangeStatus = (uuid, done) => {
     axios
-    .patch(
-      `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`,
-      {
-       done: !done
-      }
-    )
-    .then(() => {
-      console.log(done);
-      getTodos();
-    });
-}
-  
-
+      .patch(
+        `${process.env.REACT_APP_URL}task/${process.env.REACT_APP_USERID}/${uuid}`,
+        {
+          done: !done,
+        }
+      )
+      .then(() => {
+        console.log(done);
+        getTodos();
+      });
+  };
 
   // editing on doubleClick
 
@@ -199,6 +212,14 @@ function App() {
       .then(() => {
         console.log(done);
         getTodos();
+      })
+      .catch((error) => {
+        if (error.response.status === 422) {
+          alert("Not correct Task");
+          console.log(error.response);
+        } else if (error.response.status === 400) {
+          alert("Task already added");
+        }
       });
   }
 
